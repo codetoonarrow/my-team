@@ -1,7 +1,0 @@
-
-
-<style>
-   * {
-       background: blue;
-   } 
-</style>

@@ -1,5 +1,6 @@
 <script>
-import Card from './Card.svelte';
+import Card from './Team-Card.svelte';
+import DivisionCard from './DivisionCard.svelte';
 import {fade} from 'svelte/transition';
 
 let stats = getStats();
@@ -18,20 +19,23 @@ let search;
 {#await stats}
     loading
 {:then response}
-    <Card />
+
      {#each response.records as division}
- 
-        <h1>Division: {division.division.name}</h1>
-        {#each division.teamRecords as team}
-            {#if !search || team.team.name.toLowerCase().includes(search.toLowerCase())}
-                <div transition:fade>
-                    Team: {team.team.name}
-                    Wins: {team.leagueRecord.wins}
-                    Losses: {team.leagueRecord.losses}
-                    OT: {team.leagueRecord.ot}
-                </div>
-                <br> 
-            {/if}
-        {/each}
+        <DivisionCard>
+            <h1>Division: {division.division.name}</h1>
+            {#each division.teamRecords as team}
+                {#if !search || team.team.name.toLowerCase().includes(search.toLowerCase())}
+                    <div transition:fade>
+                        <Card>
+                        Team: {team.team.name}
+                        Wins: {team.leagueRecord.wins}
+                        Losses: {team.leagueRecord.losses}
+                        OT: {team.leagueRecord.ot}
+                        </Card>
+                    </div>
+                    <br> 
+                {/if}
+            {/each}
+        </DivisionCard> 
      {/each}
 {/await}
