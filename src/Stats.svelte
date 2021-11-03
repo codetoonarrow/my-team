@@ -2,7 +2,7 @@
 import Card from './Team-Card.svelte';
 import DivisionCard from './DivisionCard.svelte';
 import {fade} from 'svelte/transition';
-
+let checkBoxStatus = false;
 let stats = getStats();
 let search;
 
@@ -13,9 +13,21 @@ let search;
     }
 
 
+// When the checkbox is checked check to see what  
+function isChecked(){
+    if(checkBoxStatus){
+        checkBoxStatus = false;
+    }else {
+        checkBoxStatus = true;
+    }
+}
 </script>
     
     <input bind:value={search} type="text">
+    <input on:click={isChecked} type="checkbox">
+    {#if checkBoxStatus === true}
+         <h1>I am checked</h1>
+    {/if}
 {#await stats}
     loading
 {:then response}

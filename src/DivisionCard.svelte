@@ -4,6 +4,6 @@
 
 <style>
     .division-card {
-        background: grey;
+        background: #6200EE;
     }
 </style>
