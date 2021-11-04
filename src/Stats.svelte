@@ -1,8 +1,9 @@
 <script>
 import Card from './Team-Card.svelte';
 import DivisionCard from './DivisionCard.svelte';
-import {fade} from 'svelte/transition';
+import { fade } from 'svelte/transition';
 let checkBoxStatus = false;
+
 let stats = getStats();
 let search;
 
@@ -22,9 +23,8 @@ function isChecked(){
     }
 }
 </script>
+<input class="search-bar" bind:value={search} type="text">
     
-    <input bind:value={search} type="text">
-    <input on:click={isChecked} type="checkbox">
     {#if checkBoxStatus === true}
          <h1>I am checked</h1>
     {/if}
@@ -35,7 +35,7 @@ function isChecked(){
      {#each response.records as division}
         <DivisionCard>
             <h1>Division: {division.division.name}</h1>
-            {#each division.teamRecords as team}
+            {#each division.teamRecords as team ,i}
                 {#if !search || team.team.name.toLowerCase().includes(search.toLowerCase())}
                     <div transition:fade>
                         <Card>
@@ -51,3 +51,10 @@ function isChecked(){
         </DivisionCard> 
      {/each}
 {/await}
+
+<style>
+    .search-bar {
+        display:flexbox;
+        float:inline-end;
+    }
+</style>

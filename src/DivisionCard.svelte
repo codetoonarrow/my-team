@@ -4,6 +4,7 @@
 
 <style>
     .division-card {
-        background: #6200EE;
+        border: 1px solid #E9ECEF;
     }
+
 </style>
