@@ -8,15 +8,16 @@
 </div>
 
 <style>
+div{
+    padding-top: 13px;
+    padding-bottom: 13px;
+}
 .dark{
-    border-radius: 5px;
-    border:2px solid grey;
-    background: #1E1E1E;
+    background: #1D1D1D;
     color: #E3E3E3;
 }
 .light {
     background: white;
-    border:2px solid grey;
     color: #141414;
 }
 </style>

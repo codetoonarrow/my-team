@@ -4,7 +4,6 @@ import Card from './Team-Card.svelte';
 import DivisionCard from './DivisionCard.svelte';
 import { fade, fly } from 'svelte/transition';
 let themeEnabled;
-
 let stats = getStats();
 let search;
 
@@ -42,17 +41,17 @@ function switchTheme(){
      {#each response.records as division}
         <DivisionCard bind:themeEnabled >
             <h1>Division: {division.division.name}</h1>
-            {#each division.teamRecords as team ,i}
+            {#each division.teamRecords as team}
                 {#if !search || team.team.name.toLowerCase().includes(search.toLowerCase())}
                     <div transition:fade>
-                        <Card bind:themeEnabled>
-                        Team: {team.team.name}
+                        <Card  bind:themeEnabled >
+                        {team.team.name}
                         Wins: {team.leagueRecord.wins}
                         Losses: {team.leagueRecord.losses}
                         OT: {team.leagueRecord.ot}
                         </Card>
                     </div>
-                    <br> 
+                    
                 {/if}
             {/each}
         </DivisionCard> 
@@ -61,7 +60,7 @@ function switchTheme(){
 
 <style>
     .search-bar {
-        display:flexbox;
+        display:flex;
         float:inline-end;
     }
 
