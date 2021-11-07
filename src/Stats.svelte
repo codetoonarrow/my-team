@@ -3,7 +3,6 @@
 import Card from './Team-Card.svelte';
 import DivisionCard from './DivisionCard.svelte';
 import { fade, fly } from 'svelte/transition';
-let themeEnabled;
 let stats = getStats();
 let search;
 
@@ -16,35 +15,24 @@ let search;
 
 // When in darkmode:
 //Switch the CSS class of DivisionCard and Team-Card to darkmode
-function switchTheme(){
-		if(themeEnabled){
-			themeEnabled = false
-		}else {
-        	themeEnabled = true;
-    	}
-	}
+
 </script>
 
-{#if themeEnabled}
-	<i transition:fly="{{ y: 20, duration: 2000 }}" on:click={switchTheme} class="far fa-sun sun"></i>
-{:else}
-	<i transition:fly="{{ y: 20, duration: 2000 }}" on:click={switchTheme} class="far fa-moon moon"></i>
-{/if}
+
 
 <input class="search-bar" bind:value={search} type="text">
     
-
 {#await stats}
     loading
 {:then response}
 
      {#each response.records as division}
-        <DivisionCard bind:themeEnabled >
+        <DivisionCard>
             <h1>Division: {division.division.name}</h1>
             {#each division.teamRecords as team}
                 {#if !search || team.team.name.toLowerCase().includes(search.toLowerCase())}
                     <div transition:fade>
-                        <Card  bind:themeEnabled >
+                        <Card>
                         {team.team.name}
                         Wins: {team.leagueRecord.wins}
                         Losses: {team.leagueRecord.losses}
@@ -64,15 +52,4 @@ function switchTheme(){
         float:inline-end;
     }
 
-	.sun{
-		position: absolute; 
-		color: #69A197;
-		font-size: 20px;
-	}
-
-    .moon{
-		position: absolute;
-		color: #E9CE2C;
-		font-size: 20px;
-	}
 </style>
