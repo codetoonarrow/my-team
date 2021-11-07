@@ -2,8 +2,9 @@
 
 import Card from './Team-Card.svelte';
 import DivisionCard from './DivisionCard.svelte';
-import { fade, fly } from 'svelte/transition';
+import { fade } from 'svelte/transition';
 let stats = getStats();
+let themeEnabled;
 let search;
 
    async function getStats(){
@@ -12,13 +13,7 @@ let search;
         return stats;
     }
 
-
-// When in darkmode:
-//Switch the CSS class of DivisionCard and Team-Card to darkmode
-
 </script>
-
-
 
 <input class="search-bar" bind:value={search} type="text">
     
@@ -27,12 +22,12 @@ let search;
 {:then response}
 
      {#each response.records as division}
-        <DivisionCard>
+        <DivisionCard bind:themeEnabled>
             <h1>Division: {division.division.name}</h1>
             {#each division.teamRecords as team}
                 {#if !search || team.team.name.toLowerCase().includes(search.toLowerCase())}
                     <div transition:fade>
-                        <Card>
+                        <Card bind:themeEnabled>
                         {team.team.name}
                         Wins: {team.leagueRecord.wins}
                         Losses: {team.leagueRecord.losses}
@@ -51,5 +46,4 @@ let search;
         display:flex;
         float:inline-end;
     }
-
 </style>
