@@ -1,5 +1,5 @@
 <script>
-    export let themeEnabled;
+    import { themeEnabled } from './stores.js';
     import { fade } from 'svelte/transition';
 </script>
 

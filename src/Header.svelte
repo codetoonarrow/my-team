@@ -1,16 +1,19 @@
 <script>
     import { fly } from 'svelte/transition';
-    export let themeEnabled;
+    import { themeEnabled } from './stores.js';
+
     function switchTheme(){
 		if(themeEnabled){
 			themeEnabled = false
+            console.log("false")
 		}else {
         	themeEnabled = true;
+            console.log("true")
     	}
 	}
 </script>
 <div class="header">
-    <h1>Odd stats</h1>
+    <h1 class="logo">Odd stats</h1>
     <div class='test'>
         {#if themeEnabled}
             <i transition:fly="{{ y: 20, duration: 2000 }}" on:click={switchTheme} class="far fa-sun sun"></i>
@@ -24,6 +27,7 @@
 .header{
     display: inline-flex;
 }
+
 .sun{
     display: inline-flex;
     float:right;
