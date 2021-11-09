@@ -3,7 +3,7 @@
     import { fade } from 'svelte/transition';
 </script>
 
-<div class={themeEnabled ? 'dark' : 'light'} transition:fade>
+<div class={$themeEnabled ? 'dark' : 'light'} transition:fade>
     <slot></slot>
 </div>
 
