@@ -1,5 +1,4 @@
 <script>
-
 import Card from './Team-Card.svelte';
 import DivisionCard from './DivisionCard.svelte';
 import { fade } from 'svelte/transition';
@@ -13,7 +12,6 @@ let search;
         const stats = await res.json();
         return stats;
     }
-
 </script>
 
 <input class="search-bar" bind:value={search} type="text">

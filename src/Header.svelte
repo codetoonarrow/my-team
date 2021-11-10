@@ -11,7 +11,6 @@
             console.log("true")
     	}
 	}
-
 </script>
 
 <div class="header">
