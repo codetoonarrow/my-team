@@ -25,8 +25,9 @@ let search;
             <h1>Division: {division.division.name}</h1>
             {#each division.teamRecords as team}
                 {#if !search || team.team.name.toLowerCase().includes(search.toLowerCase())}
-                    <div transition:fade>
+                    <div  class="card-wrapper" transition:fade>
                         <Card>
+                        <input type="checkbox">
                         {team.team.name}
                         Wins: {team.leagueRecord.wins}
                         Losses: {team.leagueRecord.losses}
@@ -44,5 +45,8 @@ let search;
     .search-bar {
         display:flex;
         float:inline-end;
+    }
+    .card-wrapper{
+        cursor:pointer;
     }
 </style>
