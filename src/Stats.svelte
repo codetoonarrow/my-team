@@ -27,7 +27,6 @@ let search;
                 {#if !search || team.team.name.toLowerCase().includes(search.toLowerCase())}
                     <div  class="card-wrapper" transition:fade>
                         <Card>
-                        <input type="checkbox">
                         {team.team.name}
                         Wins: {team.leagueRecord.wins}
                         Losses: {team.leagueRecord.losses}
