@@ -5,7 +5,7 @@ import Modal from './Modal.svelte';
 import { fade } from 'svelte/transition';
 
 let stats = getStats();
-let modalToggle = false;
+let modalIsOpen = false;
 
 let search;
 
@@ -14,8 +14,13 @@ let search;
         const stats = await res.json();
         return stats;
     }
-    function handleClick(){
-        console.log("I was clicked!")
+
+    function openModal(){
+        if(!modalIsOpen){
+            modalIsOpen = true
+        }else {
+            modalIsOpen = false
+        }
     }
 
 
@@ -35,7 +40,7 @@ let search;
             <h1>Division: {division.division.name}</h1>
             {#each division.teamRecords as team}
                 {#if !search || team.team.name.toLowerCase().includes(search.toLowerCase())}
-                    <div  class="card-wrapper" on:click={handleClick} transition:fade>
+                    <div  class="card-wrapper" on:click={openModal} transition:fade>
                         <Card>
                         {team.team.name}
                         Wins: {team.leagueRecord.wins}
@@ -50,7 +55,7 @@ let search;
      {/each}
 {/await}
 
-{#if modalToggle}
+{#if modalIsOpen}
      <Modal />
 {/if}
 
