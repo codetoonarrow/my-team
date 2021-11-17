@@ -48,16 +48,17 @@ let search;
                         OT: {team.leagueRecord.ot}
                         </Card>
                     </div>
-                    
+
+                {/if}
+                {#if modalIsOpen}
+                    <Modal>
+                        {team.team.name}
+                    </Modal>    
                 {/if}
             {/each}
         </DivisionCard> 
      {/each}
 {/await}
-
-{#if modalIsOpen}
-     <Modal />
-{/if}
 
 <style>
     .search-bar {
