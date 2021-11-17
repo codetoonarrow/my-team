@@ -2,11 +2,9 @@
 import Card from './Team-Card.svelte';
 import DivisionCard from './DivisionCard.svelte';
 import Modal from './Modal.svelte';
-import { fade } from 'svelte/transition';
 
 let stats = getStats();
 let modalIsOpen = false;
-
 let search;
 
    async function getStats(){
@@ -14,7 +12,6 @@ let search;
         const stats = await res.json();
         return stats;
     }
-
     function openModal(){
         if(!modalIsOpen){
             modalIsOpen = true
@@ -23,10 +20,6 @@ let search;
         }
     }
 
-
-// On line item that is clicked:
-    // Open Modal componentent and fade the background out
-    // Modal Card for now will just show the teams name, add more stats later
 </script>
 
 <input class="search-bar" bind:value={search} type="text">
@@ -40,7 +33,7 @@ let search;
             <h1>Division: {division.division.name}</h1>
             {#each division.teamRecords as team}
                 {#if !search || team.team.name.toLowerCase().includes(search.toLowerCase())}
-                    <div  class="card-wrapper" on:click={openModal} transition:fade>
+                    <div  class="card-wrapper" on:click={openModal}>
                         <Card>
                         {team.team.name}
                         Wins: {team.leagueRecord.wins}
@@ -51,7 +44,7 @@ let search;
 
                 {/if}
                 {#if modalIsOpen}
-                    <Modal>
+                    <Modal on:close={openModal}>
                         {team.team.name}
                     </Modal>    
                 {/if}

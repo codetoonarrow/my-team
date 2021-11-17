@@ -1,9 +1,8 @@
 <script>
     import { themeEnabled } from './stores.js';
-    import { fade } from 'svelte/transition';
 </script>
 
-<div class={$themeEnabled ? 'dark' : 'light'} transition:fade>
+<div class={$themeEnabled ? 'dark' : 'light'}>
 	<slot></slot>
 </div>
 

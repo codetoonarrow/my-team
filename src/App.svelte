@@ -4,7 +4,6 @@
 	import Footer from './Footer.svelte';
 </script>
 
-
 <main>
 	<Header />
 	<Stats />
