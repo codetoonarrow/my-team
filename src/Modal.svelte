@@ -1,6 +1,8 @@
 <script>
     import { fly, fade } from 'svelte/transition';
     import { createEventDispatcher } from 'svelte';
+    export let teamName;
+    export let leagueRank;
 
     const dispatch = createEventDispatcher();
 </script>
@@ -8,6 +10,8 @@
 
 <div class="modal-bg" transition:fade>
     <div class="modal" transition:fly={{ y: -100 }}>
+        <h2>{teamName}</h2>
+        <h3>{leagueRank}</h3>
         <button on:click={ () => {
             dispatch('close');
         }}

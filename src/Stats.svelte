@@ -12,9 +12,10 @@ let search;
         const stats = await res.json();
         return stats;
     }
-    function openModal(){
+    function openModal(e){
         if(!modalIsOpen){
             modalIsOpen = true
+            console.log(e)
         }else {
             modalIsOpen = false
         }
@@ -43,14 +44,14 @@ let search;
                     </div>
 
                 {/if}
-                {#if modalIsOpen}
-                    <Modal on:close={openModal}>
-                        {team.team.name}
-                    </Modal>    
-                {/if}
+
             {/each}
         </DivisionCard> 
      {/each}
+     {#if modalIsOpen}
+<Modal {...response}>
+</Modal>    
+{/if}
 {/await}
 
 <style>
