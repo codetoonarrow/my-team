@@ -2,20 +2,17 @@
     import { fly, fade } from 'svelte/transition';
     import { createEventDispatcher } from 'svelte';
     export let teamName;
-    export let leagueRank;
+    export let rank;
 
     const dispatch = createEventDispatcher();
 </script>
 
-//User Clicks on the model item
-// Model opens
-//Stats passes the information to model to display
 <div class="modal-bg" transition:fade>
     <div class="modal" transition:fly={{ y: -100 }}>
         <h2>{teamName}</h2>
-        <h3>{leagueRank}</h3>
+        <h3>{rank}</h3>
         <button on:click={ () => {
-            dispatch('close');
+       
         }}
         >Close</button>
         <slot />
