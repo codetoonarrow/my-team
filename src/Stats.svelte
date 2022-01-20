@@ -3,22 +3,29 @@ import Card from './Team-Card.svelte';
 import DivisionCard from './DivisionCard.svelte';
 import Modal from './Modal.svelte';
 
-let stats = getStats();
-let modalIsOpen = false;
-let search;
+let stats = getStats()
+let modalIsOpen = false
+let search
+let teamName
+let leagueRank
+let teamSelected
 
    async function getStats(){
         const res = await fetch("https://statsapi.web.nhl.com/api/v1/standings?hydrate=record(overall),division,conference,team(nextSchedule(team),previousSchedule(team))&season=20212022&site=en_nhl")
         const stats = await res.json();
         return stats;
     }
-    function openModal(e){
+    function openModal(){
         if(!modalIsOpen){
             modalIsOpen = true
-            console.log(e)
         }else {
             modalIsOpen = false
         }
+    }
+
+    function handleClick(event){
+        modalIsOpen = true
+        teamName = event
     }
 
 </script>
@@ -34,26 +41,24 @@ let search;
             <h1>Division: {division.division.name}</h1>
             {#each division.teamRecords as team}
                 {#if !search || team.team.name.toLowerCase().includes(search.toLowerCase())}
-                    <div  class="card-wrapper" on:click={openModal}>
+                    <div  class="card-wrapper" on:click={(handleClick(teamName = team.team.name))}>
                         <Card>
-                        {team.team.name}
-                        Wins: {team.leagueRecord.wins}
-                        Losses: {team.leagueRecord.losses}
-                        OT: {team.leagueRecord.ot}
+                            {team.team.name}
+                            {console.log(teamName)}
+                            Wins: {team.leagueRecord.wins}
+                            Losses: {team.leagueRecord.losses}
+                            OT: {team.leagueRecord.ot}
                         </Card>
                     </div>
-
                 {/if}
-
             {/each}
         </DivisionCard> 
      {/each}
-     {#if modalIsOpen}
-<Modal {...response}>
-</Modal>    
-{/if}
-{/await}
 
+{/await}
+{#if modalIsOpen}
+<Modal teamName={teamName} leagueRank={leagueRank}/>  
+{/if}
 <style>
     .search-bar {
         display:flex;

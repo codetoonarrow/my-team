@@ -7,7 +7,9 @@
     const dispatch = createEventDispatcher();
 </script>
 
-
+//User Clicks on the model item
+// Model opens
+//Stats passes the information to model to display
 <div class="modal-bg" transition:fade>
     <div class="modal" transition:fly={{ y: -100 }}>
         <h2>{teamName}</h2>
