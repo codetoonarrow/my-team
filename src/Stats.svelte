@@ -8,6 +8,7 @@ let modalIsOpen = false
 let search
 let teamName
 let rank
+let points
 
    async function getStats(){
         const res = await fetch("https://statsapi.web.nhl.com/api/v1/standings?hydrate=record(overall),division,conference,team(nextSchedule(team),previousSchedule(team))&season=20212022&site=en_nhl")
@@ -22,10 +23,11 @@ let rank
         }
     }
 
-    function handleClick(name, ranking){
+    function handleClick(name, ranking, pointTally){
         modalIsOpen = true
         teamName = name
         rank = ranking
+        points = pointTally
     }
 
 </script>
@@ -41,7 +43,7 @@ let rank
             <h1>Division: {division.division.name}</h1>
             {#each division.teamRecords as team}
                 {#if !search || team.team.name.toLowerCase().includes(search.toLowerCase())}
-                    <div  class="card-wrapper" on:click={(handleClick(teamName = team.team.name , rank = team.leagueRank))}>
+                    <div  class="card-wrapper" on:click={(handleClick(teamName = team.team.name , rank = team.leagueRank, points = team.points))}>
                         <Card>
                             {team.team.name}
                             {console.log(rank)}
@@ -57,7 +59,7 @@ let rank
 
 {/await}
 {#if modalIsOpen}
-<Modal teamName={teamName} rank={rank}/>  
+<Modal teamName={teamName} rank={rank} points={points}/>  
 {/if}
 <style>
     .search-bar {

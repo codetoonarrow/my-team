@@ -3,6 +3,7 @@
     import { createEventDispatcher } from 'svelte';
     export let teamName;
     export let rank;
+    export let points;
 
     const dispatch = createEventDispatcher();
 </script>
@@ -10,7 +11,8 @@
 <div class="modal-bg" transition:fade>
     <div class="modal" transition:fly={{ y: -100 }}>
         <h2>{teamName}</h2>
-        <h3>{rank}</h3>
+        <h3>League Rank: {rank}</h3>
+        <h3>Points: {points}</h3>
         <button on:click={ () => {
        
         }}
