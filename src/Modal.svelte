@@ -14,9 +14,8 @@
         <h2>{teamName}</h2>
         <h3>League Rank: {rank}</h3>
         <h3>Points: {points}</h3>
-        <img src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{id}.svg" alt="">
+        <img class="" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{id}.svg" alt="{teamName} Logo">
         <button on:click={ () => {
-       
         }}
         >Close</button>
         <slot />

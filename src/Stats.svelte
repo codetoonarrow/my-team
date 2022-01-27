@@ -52,7 +52,6 @@ let id
                             id = team.team.id
                         ))}>
                         <Card>
-                            {team.team.id}
                             {team.team.name}
                             Wins: {team.leagueRecord.wins}
                             Losses: {team.leagueRecord.losses}
