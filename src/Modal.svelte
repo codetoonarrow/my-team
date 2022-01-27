@@ -4,6 +4,7 @@
     export let teamName;
     export let rank;
     export let points;
+    export let id;
 
     const dispatch = createEventDispatcher();
 </script>
@@ -13,6 +14,7 @@
         <h2>{teamName}</h2>
         <h3>League Rank: {rank}</h3>
         <h3>Points: {points}</h3>
+        <img src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{id}.svg" alt="">
         <button on:click={ () => {
        
         }}

@@ -9,6 +9,7 @@ let search
 let teamName
 let rank
 let points
+let id
 
    async function getStats(){
         const res = await fetch("https://statsapi.web.nhl.com/api/v1/standings?hydrate=record(overall),division,conference,team(nextSchedule(team),previousSchedule(team))&season=20212022&site=en_nhl")
@@ -23,11 +24,12 @@ let points
         }
     }
 
-    function handleClick(name, ranking, pointTally){
+    function handleClick(name, ranking, pointTally, logoId){
         modalIsOpen = true
         teamName = name
         rank = ranking
         points = pointTally
+        id = logoId
     }
 
 </script>
@@ -43,10 +45,15 @@ let points
             <h1>Division: {division.division.name}</h1>
             {#each division.teamRecords as team}
                 {#if !search || team.team.name.toLowerCase().includes(search.toLowerCase())}
-                    <div  class="card-wrapper" on:click={(handleClick(teamName = team.team.name , rank = team.leagueRank, points = team.points))}>
+                    <div  class="card-wrapper" on:click={(handleClick(
+                            teamName = team.team.name, 
+                            rank = team.leagueRank, 
+                            points = team.points, 
+                            id = team.team.id
+                        ))}>
                         <Card>
+                            {team.team.id}
                             {team.team.name}
-                            {console.log(rank)}
                             Wins: {team.leagueRecord.wins}
                             Losses: {team.leagueRecord.losses}
                             OT: {team.leagueRecord.ot}
@@ -59,7 +66,7 @@ let points
 
 {/await}
 {#if modalIsOpen}
-<Modal teamName={teamName} rank={rank} points={points}/>  
+<Modal teamName={teamName} rank={rank} points={points} id={id}/>  
 {/if}
 <style>
     .search-bar {
