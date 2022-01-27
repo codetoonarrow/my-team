@@ -11,10 +11,10 @@
 
 <div class="modal-bg" transition:fade>
     <div class="modal" transition:fly={{ y: -100 }}>
-        <h2>{teamName}</h2>
+        <h2 class="team-name">{teamName}</h2>
+        <img class="team-logo" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{id}.svg" alt="{teamName} Logo">
         <h3>League Rank: {rank}</h3>
         <h3>Points: {points}</h3>
-        <img class="" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{id}.svg" alt="{teamName} Logo">
         <button on:click={ () => {
         }}
         >Close</button>
@@ -35,5 +35,12 @@
         background: white;
         padding: 20px;
         border-radius: 15px;
+    }
+    .team-name{
+        display: inline;
+    }
+    .team-logo{
+        max-width: 5%;
+        float: left;
     }
 </style>
