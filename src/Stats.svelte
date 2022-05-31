@@ -11,6 +11,9 @@ let rank
 let points
 let id
 
+// https://statsapi.web.nhl.com/api/v1/people/8471698/stats?stats=gameLog&season=20212022
+// API for past schedule
+
    async function getStats(){
         const res = await fetch("https://statsapi.web.nhl.com/api/v1/standings?hydrate=record(overall),division,conference,team(nextSchedule(team),previousSchedule(team))&season=20212022&site=en_nhl")
         const stats = await res.json();
