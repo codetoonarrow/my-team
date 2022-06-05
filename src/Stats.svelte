@@ -2,6 +2,7 @@
 import Card from './Team-Card.svelte';
 import DivisionCard from './DivisionCard.svelte';
 import Modal from './Modal.svelte';
+import Wins from './Wins.svelte';
 
 let stats = getStats()
 let modalIsOpen = false
@@ -70,6 +71,8 @@ let id
 {#if modalIsOpen}
 <Modal teamName={teamName} rank={rank} points={points} id={id}/>  
 {/if}
+
+<Wins />
 <style>
     .search-bar {
         display:flex;

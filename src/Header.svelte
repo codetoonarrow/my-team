@@ -1,7 +1,7 @@
 <script>
     import { fly } from 'svelte/transition';
     import { themeEnabled } from './stores.js';
-    let dateString
+   
     function switchTheme(){
 		if($themeEnabled){
 			$themeEnabled = false
@@ -22,9 +22,9 @@
             <i transition:fly="{{ y: 20, duration: 2000 }}" on:click={switchTheme} class="far fa-moon moon"></i>
         {/if}
     </div>
-    <input type="date" bind:value={dateString}>
+    
 </div>
-<h1>{dateString}</h1>
+
 <style>
 .logo{
     margin: 0;
