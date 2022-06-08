@@ -12,8 +12,10 @@ let rank
 let points
 let id
 
-// https://statsapi.web.nhl.com/api/v1/people/8471698/stats?stats=gameLog&season=20212022
+// https://statsapi.web.nhl.com/api/v1/schedule?season=20212022
 // API for past schedule
+// Loop over the dates compare the home and away score
+// Return the winner
 
    async function getStats(){
         const res = await fetch("https://statsapi.web.nhl.com/api/v1/standings?hydrate=record(overall),division,conference,team(nextSchedule(team),previousSchedule(team))&season=20212022&site=en_nhl")
