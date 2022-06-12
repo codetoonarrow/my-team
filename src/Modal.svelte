@@ -16,6 +16,7 @@
         <h3>League Rank: {rank}</h3>
         <h3>Points: {points}</h3>
         <button on:click={ () => {
+            dispatch('close');
         }}
         >Close</button>
         <slot />

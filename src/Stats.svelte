@@ -30,6 +30,10 @@ let id
         }
     }
 
+    function closeModal(){
+        modalIsOpen = false
+    }
+
     function handleClick(name, ranking, pointTally, logoId){
         modalIsOpen = true
         teamName = name
@@ -71,7 +75,7 @@ let id
 
 {/await}
 {#if modalIsOpen}
-<Modal teamName={teamName} rank={rank} points={points} id={id}/>  
+<Modal on:close={closeModal} teamName={teamName} rank={rank} points={points} id={id}/>  
 {/if}
 
 <Wins />
