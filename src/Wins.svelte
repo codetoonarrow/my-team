@@ -8,10 +8,6 @@ async function getWins(){
     return wins
 }
 
-function handleClick(){
-
-}
-
 </script>
 
 <input type="date" bind:value={dateString}>

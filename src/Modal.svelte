@@ -5,7 +5,8 @@
     export let rank;
     export let points;
     export let id;
-
+    
+    // Custom event for when the close button is clicked within the Modal
     const dispatch = createEventDispatcher();
 </script>
 

@@ -22,13 +22,6 @@ let id
         const stats = await res.json();
         return stats;
     }
-    function openModal(){
-        if(!modalIsOpen){
-            modalIsOpen = true
-        }else {
-            modalIsOpen = false
-        }
-    }
 
     function closeModal(){
         modalIsOpen = false
