@@ -11,6 +11,8 @@ let teamName
 let rank
 let points
 let id
+let teamHome
+let teamAway
 
 // https://statsapi.web.nhl.com/api/v1/schedule?season=20212022
 // API for past schedule
@@ -27,12 +29,13 @@ let id
         modalIsOpen = false
     }
 
-    function handleClick(name, ranking, pointTally, logoId){
+    function handleClick(name, ranking, pointTally, logoId, teamSchedule){
         modalIsOpen = true
         teamName = name
         rank = ranking
         points = pointTally
         id = logoId
+        teamSchedule = schedule
     }
 
 </script>
@@ -59,7 +62,9 @@ let id
                             Wins: {team.leagueRecord.wins}
                             Losses: {team.leagueRecord.losses}
                             OT: {team.leagueRecord.ot}
+                           
                         </Card>
+                        <Wins teamHome={teamHome} teamAway={teamAway}/> 
                     </div>
                 {/if}
             {/each}
@@ -68,10 +73,10 @@ let id
 
 {/await}
 {#if modalIsOpen}
-<Modal on:close={closeModal} teamName={teamName} rank={rank} points={points} id={id}/>  
+<Modal on:close={closeModal} teamName={teamName} rank={rank} points={points} id={id} teamSchedule={Wins}/>  
 {/if}
 
-<Wins />
+
 <style>
     .search-bar {
         display:flex;

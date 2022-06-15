@@ -5,7 +5,7 @@
     export let rank;
     export let points;
     export let id;
-    
+    export let schedule;
     // Custom event for when the close button is clicked within the Modal
     const dispatch = createEventDispatcher();
 </script>
@@ -16,6 +16,7 @@
         <img class="team-logo" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{id}.svg" alt="{teamName} Logo">
         <h3>League Rank: {rank}</h3>
         <h3>Points: {points}</h3>
+        <h3>{schedule}</h3>
         <button on:click={ () => {
             dispatch('close');
         }}
