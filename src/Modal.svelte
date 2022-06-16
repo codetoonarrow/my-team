@@ -6,6 +6,17 @@
     export let points;
     export let id;
     export let schedule;
+
+    let wins = getWins()
+    export let teamHome
+    export let teamAway
+    export let dateOfGame
+
+    async function getWins(){
+        const res = await fetch("https://statsapi.web.nhl.com/api/v1/schedule?season=20212022")
+        const wins = await res.json()
+        return wins
+    }
     // Custom event for when the close button is clicked within the Modal
     const dispatch = createEventDispatcher();
 </script>
@@ -21,6 +32,17 @@
             dispatch('close');
         }}
         >Close</button>
+        {#await wins}
+            loading
+        {:then response} 
+            {#each response.dates as date}
+                {dateOfGame = date.date}
+                {#each date.games as winner}
+                    {teamHome = winner.teams.home.team.id}
+                    {teamAway = winner.teams.away.team.id}
+                {/each}
+            {/each}
+        {/await}
         <slot />
     </div>
 </div>

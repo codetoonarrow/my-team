@@ -62,9 +62,11 @@ let teamAway
                             Wins: {team.leagueRecord.wins}
                             Losses: {team.leagueRecord.losses}
                             OT: {team.leagueRecord.ot}
-                           
+                           {#if teamHome === id || teamAway === id}
+                                {id}
+                           {/if}
                         </Card>
-                        <Wins teamHome={teamHome} teamAway={teamAway}/> 
+                        
                     </div>
                 {/if}
             {/each}
@@ -73,7 +75,7 @@ let teamAway
 
 {/await}
 {#if modalIsOpen}
-<Modal on:close={closeModal} teamName={teamName} rank={rank} points={points} id={id} teamSchedule={Wins}/>  
+<Modal on:close={closeModal} teamName={teamName} rank={rank} points={points} id={id}/>  
 {/if}
 
 

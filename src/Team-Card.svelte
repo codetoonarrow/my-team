@@ -1,28 +1,6 @@
 <script>
     import { themeEnabled } from './stores.js';
-
-    let wins = getWins()
-    export let teamHome
-    export let teamAway
-
-    async function getWins(){
-        const res = await fetch("https://statsapi.web.nhl.com/api/v1/schedule?season=20212022")
-        const wins = await res.json()
-        return wins
-    }
 </script>
-
-{#await wins}
-    loading
-{:then response} 
-    {#each response.dates as date}
-        <h1>{date.date}</h1>
-         {#each date.games as winner}
-            {teamHome = winner.teams.home.team.id}
-            {teamAway = winner.teams.away.team.id}
-         {/each}
-    {/each}
-{/await}
 
 <div class={$themeEnabled ? 'dark' : 'light'}>
 	<slot></slot>
