@@ -11,8 +11,6 @@ let teamName
 let rank
 let points
 let id
-let teamHome
-let teamAway
 
 // https://statsapi.web.nhl.com/api/v1/schedule?season=20212022
 // API for past schedule
@@ -62,9 +60,6 @@ let teamAway
                             Wins: {team.leagueRecord.wins}
                             Losses: {team.leagueRecord.losses}
                             OT: {team.leagueRecord.ot}
-                           {#if teamHome === id || teamAway === id}
-                                {id}
-                           {/if}
                         </Card>
                         
                     </div>

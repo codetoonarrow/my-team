@@ -5,12 +5,8 @@
     export let rank;
     export let points;
     export let id;
-    export let schedule;
 
     let wins = getWins()
-    export let teamHome
-    export let teamAway
-    export let dateOfGame
 
     async function getWins(){
         const res = await fetch("https://statsapi.web.nhl.com/api/v1/schedule?season=20212022")
@@ -27,7 +23,6 @@
         <img class="team-logo" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{id}.svg" alt="{teamName} Logo">
         <h3>League Rank: {rank}</h3>
         <h3>Points: {points}</h3>
-        <h3>{schedule}</h3>
         <button on:click={ () => {
             dispatch('close');
         }}
@@ -36,10 +31,11 @@
             loading
         {:then response} 
             {#each response.dates as date}
-                {dateOfGame = date.date}
                 {#each date.games as winner}
-                    {teamHome = winner.teams.home.team.id}
-                    {teamAway = winner.teams.away.team.id}
+                    {#if winner.teams.home.team.id === id || winner.teams.away.team.id === id}
+                        {date.date}
+                        {teamName}
+                    {/if}
                 {/each}
             {/each}
         {/await}
