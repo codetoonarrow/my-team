@@ -5,9 +5,16 @@
     export let rank;
     export let points;
     export let id;
-
-    let wins = getWins()
-
+  
+    let wins = getWins();
+   
+    function checkScore(home, away){
+        if(home > away || away > home){
+            return "Win!"
+        } else{
+            "Loss!"
+        }
+    }
     async function getWins(){
         const res = await fetch("https://statsapi.web.nhl.com/api/v1/schedule?season=20212022")
         const wins = await res.json()
@@ -23,6 +30,7 @@
         <img class="team-logo" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{id}.svg" alt="{teamName} Logo">
         <h3>League Rank: {rank}</h3>
         <h3>Points: {points}</h3>
+        
         <button on:click={ () => {
             dispatch('close');
         }}
@@ -32,9 +40,14 @@
         {:then response} 
             {#each response.dates as date}
                 {#each date.games as winner}
-                    {#if winner.teams.home.team.id === id || winner.teams.away.team.id === id}
+                    {#if winner.teams.home.team.id === id && winner.teams.home.score > winner.teams.away.score|| winner.teams.away.team.id === id && winner.teams.away.score > winner.teams.home.score}
                         {date.date}
                         {teamName}
+                        WIN
+                        {:else if  winner.teams.home.team.id === id && winner.teams.home.score < winner.teams.away.score|| winner.teams.away.team.id === id && winner.teams.away.score < winner.teams.home.score}
+                        {date.date}
+                        {teamName}
+                        LOSS
                     {/if}
                 {/each}
             {/each}

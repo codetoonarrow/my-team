@@ -2,7 +2,6 @@
 import Card from './Team-Card.svelte';
 import DivisionCard from './DivisionCard.svelte';
 import Modal from './Modal.svelte';
-import Wins from './Wins.svelte';
 
 let stats = getStats()
 let modalIsOpen = false
@@ -27,13 +26,12 @@ let id
         modalIsOpen = false
     }
 
-    function handleClick(name, ranking, pointTally, logoId, teamSchedule){
+    function handleClick(name, ranking, pointTally, logoId){
         modalIsOpen = true
         teamName = name
         rank = ranking
         points = pointTally
         id = logoId
-        teamSchedule = schedule
     }
 
 </script>
