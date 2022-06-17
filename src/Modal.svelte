@@ -1,11 +1,11 @@
 <script>
     import { fly, fade } from 'svelte/transition';
     import { createEventDispatcher } from 'svelte';
+    import Chart from './Chart.svelte';
     export let teamName;
     export let rank;
     export let points;
     export let id;
-  
     let wins = getWins();
    
     function checkScore(home, away){
@@ -30,7 +30,7 @@
         <img class="team-logo" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{id}.svg" alt="{teamName} Logo">
         <h3>League Rank: {rank}</h3>
         <h3>Points: {points}</h3>
-        
+        <Chart />
         <button on:click={ () => {
             dispatch('close');
         }}
@@ -42,11 +42,9 @@
                 {#each date.games as winner}
                     {#if winner.teams.home.team.id === id && winner.teams.home.score > winner.teams.away.score|| winner.teams.away.team.id === id && winner.teams.away.score > winner.teams.home.score}
                         {date.date}
-                        {teamName}
                         WIN
                         {:else if  winner.teams.home.team.id === id && winner.teams.home.score < winner.teams.away.score|| winner.teams.away.team.id === id && winner.teams.away.score < winner.teams.home.score}
                         {date.date}
-                        {teamName}
                         LOSS
                     {/if}
                 {/each}
