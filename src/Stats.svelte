@@ -11,6 +11,14 @@ let rank
 let points
 let id
 
+let cacheName = 'userSettings'; 
+let url = 'https://statsapi.web.nhl.com/api/v1/standings?hydrate=record(overall),division,conference,team(nextSchedule(team),previousSchedule(team))&season=20212022&site=en_nhl';
+caches.open(cacheName).then( cache => {   cache.add(url).then( () => {
+       console.log("Data cached ")
+    });
+});
+
+
 // https://statsapi.web.nhl.com/api/v1/schedule?season=20212022
 // API for past schedule
 // Loop over the dates compare the home and away score
