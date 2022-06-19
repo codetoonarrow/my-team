@@ -23,7 +23,7 @@
         <img class="team-logo" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{id}.svg" alt="{teamName} Logo">
         <h3>League Rank: {rank}</h3>
         <h3>Points: {points}</h3>
-
+        <Chart />
         <button on:click={ () => {
             dispatch('close');
         }}
