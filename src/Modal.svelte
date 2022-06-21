@@ -6,15 +6,21 @@
     export let rank;
     export let points;
     export let id;
-    export let outcome;
     let wins = getWins();
-
+    let thing = updateOutcome();
     function updateOutcome(linePoint){
+        let yAxis = "0"
+        let result
+
         if (linePoint === "WIN") {
-            0 + " ," + 100 
+            yAxis + " ," + "100"
+            
         }else{
-            0 + " ," + 0
+            yAxis + " ," + 0
         }
+        result = Number(yAxis)
+        result += 30
+        result.toString()
     }
   
     async function getWins(){
@@ -32,7 +38,7 @@
         <img class="team-logo" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{id}.svg" alt="{teamName} Logo">
         <h3>League Rank: {rank}</h3>
         <h3>Points: {points}</h3>
-        <Chart outcome={outcome}/>
+        <Chart outcome={thing}/>
         <button on:click={ () => {
             dispatch('close');
         }}
@@ -44,7 +50,7 @@
                 {#each date.games as winner}
                     {#if winner.teams.home.team.id === id && winner.teams.home.score > winner.teams.away.score|| winner.teams.away.team.id === id && winner.teams.away.score > winner.teams.home.score}
                         {date.date}
-                        {updateOutcome("WIN")}
+                            {updateOutcome("WIN")}
                         {:else if  winner.teams.home.team.id === id && winner.teams.home.score < winner.teams.away.score|| winner.teams.away.team.id === id && winner.teams.away.score < winner.teams.home.score}
                         {date.date}
                         LOSS
