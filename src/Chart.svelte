@@ -1,3 +1,10 @@
+<script>
+export let outcome;
+//If the game resulted in a Win 2nd point = 100
+//Else 2nd point = 0
+//For both outcomes 1st point +30
+
+</script>
 <svg width="300" height="100">
 	<!-- x axis -->
 	<line x1="0" x2="300" y1="100" y2="100"></line>
@@ -18,19 +25,10 @@
 	</g>
 	
 	<!-- data -->
-	<polyline style="stroke: red; stroke-width: 2" points="
-		0,100
-		30,0
-		60,0
-		90,1
-		120,84
-		150,75
-		180,64
-		210,51
-		240,36
-		270,19
-		300,0
-	"></polyline>
+	
+	<polyline style="stroke: red; stroke-width: 2" points={outcome}></polyline>
+
+
 </svg>
 
 <style>
