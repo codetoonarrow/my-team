@@ -29,6 +29,7 @@
 .logo{
     margin: 0;
     padding-right: 50px;
+    color:white;
 }
 .button-wrapper{
     display:flex;

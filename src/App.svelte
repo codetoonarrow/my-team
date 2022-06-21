@@ -2,7 +2,9 @@
 	import Header from './Header.svelte';
 	import Stats from './Stats.svelte';
 	import Footer from './Footer.svelte';
+
 </script>
+
 
 <main>
 	<!-- svelte-ignore a11y-img-redundant-alt -->
@@ -13,10 +15,11 @@
 </main>
 
 <style>
+
 img {
-	position:absolute;
+	position: absolute;
 	z-index: -100;
-	height: 100%;
-	width: 100%;
+	width: 100vw;	
+	
 }
 </style>

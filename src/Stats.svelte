@@ -10,7 +10,7 @@ let teamName
 let rank
 let points
 let id
-
+let scroll
 let cacheName = 'userSettings'; 
 let url = 'https://statsapi.web.nhl.com/api/v1/standings?hydrate=record(overall),division,conference,team(nextSchedule(team),previousSchedule(team))&season=20212022&site=en_nhl';
 caches.open(cacheName).then( cache => {   cache.add(url).then( () => {
@@ -44,6 +44,7 @@ caches.open(cacheName).then( cache => {   cache.add(url).then( () => {
 
 </script>
 
+<svelte:window bind:scrollY={scroll}/>
 <input class="search-bar" bind:value={search} type="text">
     
 {#await stats}
@@ -61,7 +62,7 @@ caches.open(cacheName).then( cache => {   cache.add(url).then( () => {
                             points = team.points, 
                             id = team.team.id
                         ))}>
-                        <Card>
+                        <Card class="parallax">
                             {team.team.name}
                             Wins: {team.leagueRecord.wins}
                             Losses: {team.leagueRecord.losses}
@@ -88,4 +89,5 @@ caches.open(cacheName).then( cache => {   cache.add(url).then( () => {
     .card-wrapper{
         cursor:pointer;
     }
+
 </style>
