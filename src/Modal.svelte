@@ -8,26 +8,37 @@
     export let id;
     let wins = getWins();
     let gameResults = []
-    
+
     function updateOutcome(linePoint){
         let yAxis = "0"
         let result
         let addResult
         let finalResult
-
+        let combineString
+        //Todo save the result of the yaxis to a var so as to add
+        // if it is a win have starting point that is 100
+        // Push the starting point to the array
+        // Turn the yaxis from a string to a number 
+        // Add 30 to move the yaxis forward on chart
+        // Turn the yaxis back to a string
+        // Combine the yaxis as a string to the rest of the string 
         if (linePoint === "WIN") {
             finalResult = yAxis + " ," + " 100"
+            gameResults.push(finalResult)
             result = Number(yAxis)
             addResult = result + 30
             finalResult = addResult.toString()
-            finalResult.push(gameResults)
+            combineString = finalResult + " ," + " 100"
+            gameResults.push(combineString)
             
         }else{
-            yAxis + " ," + 0
+            finalResult = yAxis + " ," + 0
+            gameResults.push(finalResult)
             result = Number(yAxis)
             addResult = result + 30
             finalResult = addResult.toString()
-            finalResult.push(gameResults)
+            combineString = finalResult + " ," + " 0"
+            gameResults.push(combineString)
         }
 
     }
