@@ -7,20 +7,29 @@
     export let points;
     export let id;
     let wins = getWins();
-    let thing = updateOutcome();
+    let gameResults = []
+    
     function updateOutcome(linePoint){
         let yAxis = "0"
         let result
+        let addResult
+        let finalResult
 
         if (linePoint === "WIN") {
-            yAxis + " ," + "100"
+            finalResult = yAxis + " ," + " 100"
+            result = Number(yAxis)
+            addResult = result + 30
+            finalResult = addResult.toString()
+            finalResult.push(gameResults)
             
         }else{
             yAxis + " ," + 0
+            result = Number(yAxis)
+            addResult = result + 30
+            finalResult = addResult.toString()
+            finalResult.push(gameResults)
         }
-        result = Number(yAxis)
-        result += 30
-        result.toString()
+
     }
   
     async function getWins(){
@@ -30,6 +39,7 @@
     }
     // Custom event for when the close button is clicked within the Modal
     const dispatch = createEventDispatcher();
+    
 </script>
 
 <div class="modal-bg" transition:fade>
@@ -38,7 +48,7 @@
         <img class="team-logo" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{id}.svg" alt="{teamName} Logo">
         <h3>League Rank: {rank}</h3>
         <h3>Points: {points}</h3>
-        <Chart outcome={thing}/>
+        <Chart outcome={gameResults}/>
         <button on:click={ () => {
             dispatch('close');
         }}
@@ -50,10 +60,10 @@
                 {#each date.games as winner}
                     {#if winner.teams.home.team.id === id && winner.teams.home.score > winner.teams.away.score|| winner.teams.away.team.id === id && winner.teams.away.score > winner.teams.home.score}
                         {date.date}
-                            {updateOutcome("WIN")}
+                        {updateOutcome("WIN")}
                         {:else if  winner.teams.home.team.id === id && winner.teams.home.score < winner.teams.away.score|| winner.teams.away.team.id === id && winner.teams.away.score < winner.teams.home.score}
                         {date.date}
-                        LOSS
+                        {updateOutcome("LOSS")}
                     {/if}
                 {/each}
             {/each}
