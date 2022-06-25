@@ -5,7 +5,7 @@ export let outcome;
 //For both outcomes 1st point +30
 
 </script>
-<svg width="300" height="100">
+<svg class="chart" width="300" height="100">
 	<!-- x axis -->
 	<line x1="0" x2="300" y1="100" y2="100"></line>
 	<g class="x" transform="translate(0,120)">
@@ -36,7 +36,8 @@ export let outcome;
 		overflow: visible;
 		margin: 3em;
 	}
-	
+
+
 	line, polyline {
 		fill: none;
 		stroke: black;
@@ -51,4 +52,5 @@ export let outcome;
 		text-anchor: end;
 		dominant-baseline: middle;
 	}
+
 </style>

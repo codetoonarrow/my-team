@@ -15,6 +15,7 @@
         return wins
     }
     let gameResults = []
+    let moveLine = 0
     let testArray = ["30, 100", "30, 0", "30, 100"]
         //Todo save the result of the yaxis to a var so as to add
         // if it is a win have starting point that is 100
@@ -34,7 +35,7 @@
             finalResult = yAxis + " ," + " 100"
             gameResults.push(finalResult)
             result = parseInt(yAxis)
-            addResult = result + moveLine
+            addResult = result + 30
             finalResult = addResult.toString()
             combineString = finalResult + " ," + " 100"
             gameResults.push(combineString)

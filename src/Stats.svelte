@@ -57,10 +57,10 @@ let scroll
                             id = team.team.id
                         ))}>
                         <Card class="parallax">
-                            {team.team.name}
-                            Wins: {team.leagueRecord.wins}
-                            Losses: {team.leagueRecord.losses}
-                            OT: {team.leagueRecord.ot}
+                            <h4>{team.team.name}</h4>
+                            <h4>Wins: {team.leagueRecord.wins} | </h4>
+                            <h4>Losses: {team.leagueRecord.losses} | </h4>
+                            <h4>OT: {team.leagueRecord.ot}</h4>
                         </Card>
                         
                     </div>
@@ -82,6 +82,11 @@ let scroll
     }
     .card-wrapper{
         cursor:pointer;
+    }
+    h3, h4{
+        display: inline-block;
+        margin:0;
+        padding: 0;
     }
 
 </style>
