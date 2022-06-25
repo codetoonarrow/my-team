@@ -7,14 +7,15 @@
     export let points;
     export let id;
     let wins = getWins();
-    let gameResults = []
 
-    function updateOutcome(linePoint){
-        let yAxis = "0"
-        let result
-        let addResult
-        let finalResult
-        let combineString
+
+    async function getWins(){
+        const res = await fetch("https://statsapi.web.nhl.com/api/v1/schedule?season=20212022")
+        const wins = await res.json()
+        return wins
+    }
+    let gameResults = []
+    let testArray = ["30, 100", "30, 0", "30, 100"]
         //Todo save the result of the yaxis to a var so as to add
         // if it is a win have starting point that is 100
         // Push the starting point to the array
@@ -22,32 +23,35 @@
         // Add 30 to move the yaxis forward on chart
         // Turn the yaxis back to a string
         // Combine the yaxis as a string to the rest of the string 
+    function updateOutcome(linePoint, moveLine){
+        let yAxis = "0"
+        let result
+        let addResult
+        let finalResult
+        let combineString
+
         if (linePoint === "WIN") {
             finalResult = yAxis + " ," + " 100"
             gameResults.push(finalResult)
-            result = Number(yAxis)
-            addResult = result + 30
+            result = parseInt(yAxis)
+            addResult = result + moveLine
             finalResult = addResult.toString()
             combineString = finalResult + " ," + " 100"
             gameResults.push(combineString)
-            
-        }else{
+            console.log(combineString)
+        } else if (linePoint === "LOSS"){
             finalResult = yAxis + " ," + 0
             gameResults.push(finalResult)
-            result = Number(yAxis)
-            addResult = result + 30
+            result = parseInt(yAxis)
+            addResult = result + moveLine
             finalResult = addResult.toString()
             combineString = finalResult + " ," + " 0"
             gameResults.push(combineString)
+            console.log(combineString)
         }
-
     }
   
-    async function getWins(){
-        const res = await fetch("https://statsapi.web.nhl.com/api/v1/schedule?season=20212022")
-        const wins = await res.json()
-        return wins
-    }
+
     // Custom event for when the close button is clicked within the Modal
     const dispatch = createEventDispatcher();
     
@@ -59,7 +63,7 @@
         <img class="team-logo" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{id}.svg" alt="{teamName} Logo">
         <h3>League Rank: {rank}</h3>
         <h3>Points: {points}</h3>
-        <Chart outcome={gameResults}/>
+        <Chart outcome={testArray}/>
         <button on:click={ () => {
             dispatch('close');
         }}

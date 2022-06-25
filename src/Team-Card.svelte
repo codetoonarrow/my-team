@@ -9,6 +9,7 @@
 <style>
 div{
     padding-top: 13px;
+    margin-left: 30px;
     padding-bottom: 13px;
 }
 
