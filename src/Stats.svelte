@@ -83,7 +83,7 @@ let scroll
     .card-wrapper{
         cursor:pointer;
     }
-    h3, h4{
+    h4{
         display: inline-block;
         margin:0;
         padding: 0;
