@@ -14,7 +14,7 @@ div{
 }
 
 .dark{
-    background: #1D1D1D;
+    background: #121212;
     color: #E3E3E3;
 }
 div.dark:hover{

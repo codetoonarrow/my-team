@@ -1,7 +1,6 @@
 <script>
     import { fly } from 'svelte/transition';
     import { themeEnabled } from './stores.js';
-    import LeagueButton from './League-Button.svelte';
    
     function switchTheme(){
 		if($themeEnabled){
@@ -23,7 +22,6 @@
             <i transition:fly="{{ y: 20, duration: 2000 }}" on:click={switchTheme} class="far fa-moon moon"></i>
         {/if}
     </div>
-    <LeagueButton />
 </div>
 
 <style>
