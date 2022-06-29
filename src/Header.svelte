@@ -22,6 +22,7 @@
             <i transition:fly="{{ y: 20, duration: 2000 }}" on:click={switchTheme} class="far fa-moon moon"></i>
         {/if}
     </div>
+
 </div>
 
 <style>
@@ -29,6 +30,8 @@
     margin: 0;
     padding-right: 50px;
     color:white;
+    font-family: 'Pacifico', cursive;
+    padding: 10px;
 }
 .button-wrapper{
     display:flex;
@@ -37,6 +40,8 @@
 }
 .header{
     display: inline-flex;
+    background:#B7CECE;
+    width: 100%;
 }
 .sun{
     display: inline-flex;

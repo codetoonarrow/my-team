@@ -15,7 +15,7 @@
         return wins
     }
     let gameResults = []
-    let moveLine = 0
+    let yAxis = 0
     let testArray = ["30, 100", "30, 0", "30, 100"]
         //Todo save the result of the yaxis to a var so as to add
         // if it is a win have starting point that is 100
@@ -25,7 +25,6 @@
         // Turn the yaxis back to a string
         // Combine the yaxis as a string to the rest of the string 
     function updateOutcome(linePoint, moveLine){
-        let yAxis = "0"
         let result
         let addResult
         let finalResult
@@ -35,8 +34,8 @@
             finalResult = yAxis + " ," + " 100"
             gameResults.push(finalResult)
             result = parseInt(yAxis)
-            addResult = result + 30
-            finalResult = addResult.toString()
+            result += 30
+            finalResult = result.toString()
             combineString = finalResult + " ," + " 100"
             gameResults.push(combineString)
             console.log(combineString)
@@ -69,7 +68,7 @@
             dispatch('close');
         }}
         >Close</button>
-        {#await wins}
+        <!-- {#await wins}
             loading
         {:then response} 
             {#each response.dates as date}
@@ -83,8 +82,7 @@
                     {/if}
                 {/each}
             {/each}
-        {/await}
-        <slot />
+        {/await} -->
     </div>
 </div>
 

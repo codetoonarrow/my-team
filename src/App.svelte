@@ -18,7 +18,12 @@
 img {
 	position: absolute;
 	z-index: -100;
-	width: 100vw;	
 	
+	min-height: 100%;
+  	min-width: 1024px;
+	  width: 100%;
+  height: auto;
+  top: 0;
+  left: 0;
 }
 </style>

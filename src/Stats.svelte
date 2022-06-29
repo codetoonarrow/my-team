@@ -77,8 +77,7 @@ let scroll
 
 <style>
     .search-bar {
-        display:flex;
-        float:inline-end;
+        display: inline-block;
     }
     .card-wrapper{
         cursor:pointer;
