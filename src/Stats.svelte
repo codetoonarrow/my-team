@@ -39,8 +39,9 @@ let scroll
 </script>
 
 <svelte:window bind:scrollY={scroll}/>
-<input class="search-bar" bind:value={search} type="text">
-    
+<div class="search-box">
+    <input class="search-bar" placeholder="Search for team" bind:value={search} type="text">
+</div>
 {#await stats}
     loading
 {:then response}
@@ -76,8 +77,16 @@ let scroll
 
 
 <style>
-    .search-bar {
-        display: inline-block;
+    .search-box{
+        text-align: center;
+    }
+    .search-bar{
+        display: block;
+        margin : 0 auto;
+        width: 584px;
+        height: 44px;
+        border-radius: 25px;
+        margin-top: 50px;
     }
     .card-wrapper{
         cursor:pointer;
