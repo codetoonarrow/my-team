@@ -48,7 +48,7 @@ let scroll
 
      {#each response.records as division}
         <DivisionCard>
-            <h1>Division: {division.division.name}</h1>
+            <h1 class="division-name">Division: {division.division.name}</h1>
             {#each division.teamRecords as team}
                 {#if !search || team.team.name.toLowerCase().includes(search.toLowerCase())}
                     <div  class="card-wrapper" on:click={(handleClick(
@@ -80,13 +80,17 @@ let scroll
     .search-box{
         text-align: center;
     }
+    .division-name{
+        margin-left: 20px;
+    }
     .search-bar{
         display: block;
         margin : 0 auto;
         width: 584px;
         height: 44px;
         border-radius: 25px;
-        margin-top: 50px;
+        margin-top: 100px;
+        margin-bottom: 100px;
     }
     .card-wrapper{
         cursor:pointer;

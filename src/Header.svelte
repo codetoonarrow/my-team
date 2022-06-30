@@ -32,6 +32,8 @@
     color:white;
     font-family: 'Pacifico', cursive;
     padding: 10px;
+    margin-left: 20px;
+    margin-right: 50px;
 }
 .button-wrapper{
     display:flex;
@@ -42,6 +44,7 @@
     display: inline-flex;
     background:#B7CECE;
     width: 100%;
+    border-bottom: 1px solid #272729;
 }
 .sun{
     display: inline-flex;

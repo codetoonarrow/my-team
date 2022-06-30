@@ -2,6 +2,7 @@
     import { fly, fade } from 'svelte/transition';
     import { createEventDispatcher } from 'svelte';
     import Chart from './Chart.svelte';
+import { dataset_dev } from 'svelte/internal';
     export let teamName;
     export let rank;
     export let points;
@@ -12,8 +13,11 @@
     async function getWins(){
         const res = await fetch("https://statsapi.web.nhl.com/api/v1/schedule?season=20212022")
         const wins = await res.json()
-        return wins
+        const results = await wins
+        const test1 =  results.dates.map(date =>  date.games.map(game => game.games))
+        console.log(test1)
     }
+    
     let gameResults = []
     let yAxis = 0
     let testArray = ["30, 100", "30, 0", "30, 100"]
