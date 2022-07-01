@@ -14,8 +14,9 @@ import { dataset_dev } from 'svelte/internal';
         const res = await fetch("https://statsapi.web.nhl.com/api/v1/schedule?season=20212022")
         const wins = await res.json()
         const results = await wins
-        const test1 =  results.dates.map(date =>  date.games.map(game => game.games))
-        console.log(test1)
+        for (let i = 0; i  < results.length; i++){
+            console.log(dates[i])
+        }
     }
     
     let gameResults = []
