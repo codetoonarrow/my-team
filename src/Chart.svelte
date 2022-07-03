@@ -42,7 +42,7 @@ export let outcome;
 	
 	.x text {
 		text-anchor: middle;
-    font-size: 10px;
+    	font-size: 10px;
 	}
 	
 	.y text {
