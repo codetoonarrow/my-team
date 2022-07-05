@@ -57,7 +57,7 @@ let scroll
                             points = team.points, 
                             id = team.team.id
                         ))}>
-                        <Card class="parallax">
+                        <Card>
                             <h4>{team.team.name}</h4>
                             <h4>Wins: {team.leagueRecord.wins} | </h4>
                             <h4>Losses: {team.leagueRecord.losses} | </h4>

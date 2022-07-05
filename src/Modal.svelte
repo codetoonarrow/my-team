@@ -17,8 +17,8 @@
         for (let i = 0; i  < results.length; i++){
             let obj = results[i]
             for (let j = 0; j < obj.length; j++){
-                let obj2 = games[j]
-                console.log(obj2.games)
+                // let obj2 = games[j]
+                console.log(obj)
             }
         }
     }
@@ -70,8 +70,8 @@
     <div class="modal" transition:fly={{ y: -100 }}>
         <h2 class="team-name">{teamName}</h2>
         <img class="team-logo" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{id}.svg" alt="{teamName} Logo">
-        <h3>League Rank: {rank}</h3>
-        <h3>Points: {points}</h3>
+        <!-- <h3>League Rank: {rank}</h3>
+        <h3>Points: {points}</h3> -->
         <Chart outcome={testArray}/>
         <button on:click={ () => {
             dispatch('close');
@@ -111,6 +111,7 @@
     }
     .team-name{
         display: inline;
+        padding-left: 50px;
     }
     .team-logo{
         max-width: 5%;
