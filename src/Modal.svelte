@@ -18,8 +18,13 @@
             // console.log(results[i].games)
             let obj = results[i].games
             for (let j = 0; j < obj.length; j++){
-                console.log(obj[j].teams.away.score)
-            
+                // console.log(obj[j].teams.away.score)
+                // Get the id of the current team selected 
+                if (obj[j].teams.home.team.id === id && obj[j].teams.home.score > obj[j].teams.away.score|| obj[j].teams.away.team.id === id && obj[j].teams.away.score > obj[j].teams.home.score) {
+                    console.log("WIN")
+                }else{
+                    console.log("LOSE")
+                }
             }
         }
     }
