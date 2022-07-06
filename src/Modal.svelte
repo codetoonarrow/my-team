@@ -15,10 +15,11 @@
         const wins = await res.json()
         const results = wins.dates
         for (let i = 0; i  < results.length; i++){
-            let obj = results[i]
+            // console.log(results[i].games)
+            let obj = results[i].games
             for (let j = 0; j < obj.length; j++){
-                // let obj2 = games[j]
-                console.log(obj)
+                console.log(obj[j].teams.away.score)
+            
             }
         }
     }
