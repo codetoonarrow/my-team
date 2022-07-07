@@ -8,6 +8,8 @@
     export let points;
     export let id;
     let wins = getWins();
+    let gameResults = []
+    let yAxis = 0
 
 
     async function getWins(){
@@ -15,41 +17,24 @@
         const wins = await res.json()
         const results = wins.dates
         for (let i = 0; i  < results.length; i++){
-            // console.log(results[i].games)
             let obj = results[i].games
             for (let j = 0; j < obj.length; j++){
-                // console.log(obj[j].teams.away.score)
-                // Get the id of the current team selected 
                 if (obj[j].teams.home.team.id === id && obj[j].teams.home.score > obj[j].teams.away.score|| obj[j].teams.away.team.id === id && obj[j].teams.away.score > obj[j].teams.home.score) {
-                    // console.log("WIN")
                     updateOutcome("WIN")
                 }else if (obj[j].teams.home.team.id === id && obj[j].teams.home.score < obj[j].teams.away.score|| obj[j].teams.away.team.id === id && obj[j].teams.away.score < obj[j].teams.home.score){
                     updateOutcome("LOSS")
-                    // console.log("LOSE")
                 }
             }
         }
     }
 
-    let gameResults = []
-    let yAxis = 0
-    // let testArray = ["30, 100", "30, 0", "30, 100"]
-        //Todo save the result of the yaxis to a var so as to add
-        // if it is a win have starting point that is 100
-        // Push the starting point to the array
-        // Turn the yaxis from a string to a number 
-        // Add 30 to move the yaxis forward on chart
-        // Turn the yaxis back to a string
-        // Combine the yaxis as a string to the rest of the string 
     function updateOutcome(linePoint){
         let result
-        let addResult
         let finalResult
         let combineString
 
         if (linePoint === "WIN") {
             finalResult = yAxis + " ," + " 100"
-            gameResults.push(finalResult)
             result = parseInt(yAxis)
             result += 30
             finalResult = result.toString()
@@ -59,10 +44,9 @@
             console.log(gameResults)
         } else if (linePoint === "LOSS"){
             finalResult = yAxis + " ," + 0
-            gameResults.push(finalResult)
             result = parseInt(yAxis)
-            addResult = result + 30
-            finalResult = addResult.toString()
+            result += 30
+            finalResult = result.toString()
             combineString = finalResult + " ," + " 0"
             yAxis = result
             gameResults.push(combineString)
