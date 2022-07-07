@@ -36,7 +36,7 @@
         if (linePoint === "WIN") {
             finalResult = yAxis + " ," + " 100"
             result = parseInt(yAxis)
-            result += 30
+            result += 5
             finalResult = result.toString()
             combineString = finalResult + " ," + " 100"
             yAxis = result
@@ -45,7 +45,7 @@
         } else if (linePoint === "LOSS"){
             finalResult = yAxis + " ," + 0
             result = parseInt(yAxis)
-            result += 30
+            result += 5
             finalResult = result.toString()
             combineString = finalResult + " ," + " 0"
             yAxis = result
@@ -67,7 +67,11 @@
         <img class="team-logo" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{id}.svg" alt="{teamName} Logo">
         <!-- <h3>League Rank: {rank}</h3>
         <h3>Points: {points}</h3> -->
-        <Chart outcome={gameResults}/>
+        {#await wins}
+            loading
+        {:then}
+            <Chart outcome={gameResults}/>
+        {/await}
         <button on:click={ () => {
             dispatch('close');
         }}

@@ -9,14 +9,7 @@ export let outcome;
 	<svg width="300" height="100">
 		<!-- x axis -->
 		<line x1="0" x2="300" y1="100" y2="100"></line>
-		<g class="x" transform="translate(0,120)">
-			<text x="0">0</text>
-			<text x="60">2021-10-21</text>
-			<text x="120">4</text>
-			<text x="180">6</text>
-			<text x="240">8</text>
-			<text x="300">10</text>
-		</g>
+		<g class="x" transform="translate(0,120)"></g>
 		
 		<!-- y axis -->
 		<line x1="0" x2="0" y1="0" y2="100"></line>
