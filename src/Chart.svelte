@@ -6,9 +6,9 @@ export let outcome;
 
 </script>
 <div class="chart">
-	<svg width="300" height="100">
+	<svg width="600" height="100">
 		<!-- x axis -->
-		<line x1="0" x2="300" y1="100" y2="100"></line>
+		<line x1="0" x2="600" y1="100" y2="100"></line>
 		<g class="x" transform="translate(0,120)"></g>
 		
 		<!-- y axis -->
@@ -18,7 +18,7 @@ export let outcome;
 			<text y="0">Win</text>
 		</g>
 		<!-- data -->
-		<polyline style="stroke: red; stroke-width: 2" points={outcome}></polyline>
+		<polyline style="stroke: red; stroke-width: 3" points={outcome}></polyline>
 	</svg>
 </div>
 <style>
@@ -33,14 +33,8 @@ export let outcome;
 		stroke: black;
 	}
 	
-	.x text {
-		text-anchor: middle;
-    	font-size: 10px;
-	}
-	
 	.y text {
 		text-anchor: end;
-		dominant-baseline: middle;
 	}
 
 	.chart {

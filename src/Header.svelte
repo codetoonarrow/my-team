@@ -17,9 +17,9 @@
     <h1 class="logo">Odd stats</h1>
     <div class='button-wrapper'>
         {#if $themeEnabled}
-            <i transition:fly="{{ y: 20, duration: 2000 }}" on:click={switchTheme} class="far fa-sun sun"></i>
+            <i transition:fly="{{ y: 20, duration: 500 }}" on:click={switchTheme} class="far fa-sun sun"></i>
         {:else}
-            <i transition:fly="{{ y: 20, duration: 2000 }}" on:click={switchTheme} class="far fa-moon moon"></i>
+            <i transition:fly="{{ y: 20, duration: 500 }}" on:click={switchTheme} class="far fa-moon moon"></i>
         {/if}
     </div>
 

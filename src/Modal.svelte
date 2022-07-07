@@ -4,8 +4,8 @@
     import Chart from './Chart.svelte';
     import { dataset_dev } from 'svelte/internal';
     export let teamName;
-    export let rank;
-    export let points;
+    // export let rank;
+    // export let points;
     export let id;
     let wins = getWins();
     let gameResults = []
@@ -76,21 +76,6 @@
             dispatch('close');
         }}
         >Close</button>
-        <!-- {#await wins}
-            loading
-        {:then response} 
-            {#each response.dates as date}
-                {#each date.games as winner}
-                    {#if winner.teams.home.team.id === id && winner.teams.home.score > winner.teams.away.score|| winner.teams.away.team.id === id && winner.teams.away.score > winner.teams.home.score}
-                        {date.date}
-                        {updateOutcome("WIN")}
-                        {:else if  winner.teams.home.team.id === id && winner.teams.home.score < winner.teams.away.score|| winner.teams.away.team.id === id && winner.teams.away.score < winner.teams.home.score}
-                        {date.date}
-                        {updateOutcome("LOSS")}
-                    {/if}
-                {/each}
-            {/each}
-        {/await} -->
     </div>
 </div>
 
