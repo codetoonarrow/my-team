@@ -21,9 +21,11 @@
                 // console.log(obj[j].teams.away.score)
                 // Get the id of the current team selected 
                 if (obj[j].teams.home.team.id === id && obj[j].teams.home.score > obj[j].teams.away.score|| obj[j].teams.away.team.id === id && obj[j].teams.away.score > obj[j].teams.home.score) {
-                    console.log("WIN")
-                }else{
-                    console.log("LOSE")
+                    // console.log("WIN")
+                    updateOutcome("WIN")
+                }else if (obj[j].teams.home.team.id === id && obj[j].teams.home.score < obj[j].teams.away.score|| obj[j].teams.away.team.id === id && obj[j].teams.away.score < obj[j].teams.home.score){
+                    updateOutcome("LOSS")
+                    // console.log("LOSE")
                 }
             }
         }
@@ -31,7 +33,7 @@
 
     let gameResults = []
     let yAxis = 0
-    let testArray = ["30, 100", "30, 0", "30, 100"]
+    // let testArray = ["30, 100", "30, 0", "30, 100"]
         //Todo save the result of the yaxis to a var so as to add
         // if it is a win have starting point that is 100
         // Push the starting point to the array
@@ -39,7 +41,7 @@
         // Add 30 to move the yaxis forward on chart
         // Turn the yaxis back to a string
         // Combine the yaxis as a string to the rest of the string 
-    function updateOutcome(linePoint, moveLine){
+    function updateOutcome(linePoint){
         let result
         let addResult
         let finalResult
@@ -58,7 +60,7 @@
             finalResult = yAxis + " ," + 0
             gameResults.push(finalResult)
             result = parseInt(yAxis)
-            addResult = result + moveLine
+            addResult = result + 30
             finalResult = addResult.toString()
             combineString = finalResult + " ," + " 0"
             gameResults.push(combineString)
@@ -78,7 +80,7 @@
         <img class="team-logo" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{id}.svg" alt="{teamName} Logo">
         <!-- <h3>League Rank: {rank}</h3>
         <h3>Points: {points}</h3> -->
-        <Chart outcome={testArray}/>
+        <Chart outcome={gameResults}/>
         <button on:click={ () => {
             dispatch('close');
         }}
