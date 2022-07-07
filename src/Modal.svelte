@@ -54,8 +54,9 @@
             result += 30
             finalResult = result.toString()
             combineString = finalResult + " ," + " 100"
+            yAxis = result
             gameResults.push(combineString)
-            console.log(combineString)
+            console.log(gameResults)
         } else if (linePoint === "LOSS"){
             finalResult = yAxis + " ," + 0
             gameResults.push(finalResult)
@@ -63,9 +64,11 @@
             addResult = result + 30
             finalResult = addResult.toString()
             combineString = finalResult + " ," + " 0"
+            yAxis = result
             gameResults.push(combineString)
-            console.log(combineString)
+            console.log(gameResults)
         }
+        
     }
   
 
