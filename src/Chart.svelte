@@ -18,7 +18,7 @@ export let outcome;
 			<text y="0">Win</text>
 		</g>
 		<!-- data -->
-		<polyline style="stroke: red; stroke-width: 3" points={outcome}></polyline>
+		<polyline style="stroke: #ef6351; stroke-width: 3" points={outcome}></polyline>
 	</svg>
 </div>
 <style>
