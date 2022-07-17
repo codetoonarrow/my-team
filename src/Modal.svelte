@@ -19,7 +19,7 @@
         for (let i = 0; i  < results.length; i++){
             let obj = results[i].games
             for (let j = 0; j < obj.length; j++){
-                if (obj[j].teams.home.team.id === id && obj[j].teams.home.score > obj[j].teams.away.score|| obj[j].teams.away.team.id === id && obj[j].teams.away.score > obj[j].teams.home.score) {
+                if (obj[j].teams.home.team.id === id && obj[j].teams.home.score > obj[j].teams.away.score || obj[j].teams.away.team.id === id && obj[j].teams.away.score > obj[j].teams.home.score) {
                     updateOutcome("WIN")
                 }else if (obj[j].teams.home.team.id === id && obj[j].teams.home.score < obj[j].teams.away.score|| obj[j].teams.away.team.id === id && obj[j].teams.away.score < obj[j].teams.home.score){
                     updateOutcome("LOSS")
@@ -34,20 +34,20 @@
         let combineString
 
         if (linePoint === "WIN") {
+            finalResult = yAxis + " ," + " 0"
+            result = parseInt(yAxis)
+            result += 5
+            finalResult = result.toString()
+            combineString = finalResult + " ," + " 0"
+            yAxis = result
+            gameResults.push(combineString)
+            console.log(gameResults)
+        } else if (linePoint === "LOSS"){
             finalResult = yAxis + " ," + " 100"
             result = parseInt(yAxis)
             result += 5
             finalResult = result.toString()
             combineString = finalResult + " ," + " 100"
-            yAxis = result
-            gameResults.push(combineString)
-            console.log(gameResults)
-        } else if (linePoint === "LOSS"){
-            finalResult = yAxis + " ," + 0
-            result = parseInt(yAxis)
-            result += 5
-            finalResult = result.toString()
-            combineString = finalResult + " ," + " 0"
             yAxis = result
             gameResults.push(combineString)
             console.log(gameResults)
