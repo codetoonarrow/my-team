@@ -2,6 +2,7 @@
     import { fly, fade } from 'svelte/transition';
     import { createEventDispatcher } from 'svelte';
     import Chart from './Chart.svelte';
+    import YearSelect from './YearSelect.svelte';
     import { dataset_dev } from 'svelte/internal';
     export let teamName;
     // export let rank;
@@ -10,10 +11,13 @@
     let wins = getWins();
     let gameResults = []
     let yAxis = 0
-
+    let selectedYear
+    let items = [2021, 2022, 2023]
+    let answer = ''
 
     async function getWins(){
-        const res = await fetch("https://statsapi.web.nhl.com/api/v1/schedule?season=20212022")
+        let season = 20212022
+        const res = await fetch(`https://statsapi.web.nhl.com/api/v1/schedule?season=${season}`)
         const wins = await res.json()
         const results = wins.dates
         for (let i = 0; i  < results.length; i++){
@@ -27,7 +31,12 @@
             }
         }
     }
-
+    function seasonYear(selectedYear){
+        let seasonYearStart = selectedYear
+        let seasonYearEnd = selectedYear + 1
+        let combinedSeasonYear = seasonYearStart + seasonYearEnd
+        console.log(combinedSeasonYear)
+    }
     function updateOutcome(linePoint){
         let result
         let finalResult
@@ -41,7 +50,6 @@
             combineString = finalResult + " ," + " 0"
             yAxis = result
             gameResults.push(combineString)
-            console.log(gameResults)
         } else if (linePoint === "LOSS"){
             finalResult = yAxis + " ," + " 100"
             result = parseInt(yAxis)
@@ -50,9 +58,7 @@
             combineString = finalResult + " ," + " 100"
             yAxis = result
             gameResults.push(combineString)
-            console.log(gameResults)
         }
-        
     }
   
 
@@ -75,7 +81,14 @@
         <button on:click={ () => {
             dispatch('close');
         }}
-        >Close</button>
+        
+        >Close</button>  
+        <select bind:value={selectedYear} on:change="{() => answer = ''}">
+            {#each items as item}
+                <option value={item}>{item}</option>
+                
+            {/each}
+        </select>  
     </div>
 </div>
 
