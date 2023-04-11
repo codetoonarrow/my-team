@@ -47,6 +47,8 @@
             return getWins(combinedSeasonYear)
         }   
     }
+
+    //Plots the results to the chart
     
     function updateOutcome(linePoint){
         let result
