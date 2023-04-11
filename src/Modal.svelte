@@ -36,7 +36,7 @@
 
     // The NHL API requires that if a season is to be returned it needs to be the year and the year following
     // For example: Season of 2018 would be "20182019"
-    // This function takes a selected year as a string and appends the next year to the
+    // This function takes a selected year as a string and appends the next year
     function seasonYear(selectedYear){
         let seasonYearStart = selectedYear
         let seasonYearEnd = selectedYear + 1
