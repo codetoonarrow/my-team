@@ -97,7 +97,7 @@
         }}
         
         >Close</button>  
-        <select bind:value={selectedYear} on:change="{seasonYear(selectedYear)}">
+        <select bind:value={selectedYear} on:change="{async (event) => await seasonYear(parseInt(event.target.value))}">
             {#each items as item}
                 <option value={item}>{item}</option>
             {/each}
