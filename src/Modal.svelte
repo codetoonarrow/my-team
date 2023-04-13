@@ -16,8 +16,7 @@
     let selectedYear = 2018
     let items = [2018, 2019, 2020, 2021]
 
-
-    async function getWins(combinedSeasonYear = 20182019){
+    async function getWins(combinedSeasonYear = 20212022){
         console.log("Ran in getWins func" + " " + combinedSeasonYear)
         const res = await fetch(`https://statsapi.web.nhl.com/api/v1/schedule?season=${combinedSeasonYear}`)
         const wins = await res.json()
@@ -32,6 +31,7 @@
                 }
             }
         }
+        console.log( "Hey I am running inside getWins, this is what is selected: " + combinedSeasonYear)
     }
 
     // The NHL API requires that if a season is to be returned it needs to be the year and the year following
@@ -43,13 +43,14 @@
         let addSeason = seasonYearStart.toString() + seasonYearEnd.toString()
         let combinedSeasonYear = Number(addSeason)
         if(combinedSeasonYear > 0 ){
-            console.log("this season is" + combinedSeasonYear)
-            return getWins(combinedSeasonYear)
+            getWins(combinedSeasonYear)
         }   
     }
 
-    //Plots the results to the chart
-    
+    let result = seasonYear(2021)
+    console.log(result)
+// console.log(combinedSeasonYear)
+    //Plots the results of the wins and losses to  chart
     function updateOutcome(linePoint){
         let result
         let finalResult
