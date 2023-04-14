@@ -19,11 +19,7 @@
 img {
 	position: absolute;
 	z-index: -100;
-	min-height: 100%;
-  	min-width: 1024px;
-	width: 100%;
-  	height: auto;
- 	top: 0;
-  	left: 0;
+	background-repeat: repeat-y;
+  background-size: auto 100%;
 }
 </style>
