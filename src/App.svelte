@@ -20,6 +20,10 @@ img {
 	position: absolute;
 	z-index: -100;
 	background-repeat: repeat-y;
-  background-size: auto 100%;
+  	background-size: auto 100%;
+}
+
+main {
+	margin-bottom: 100vh;
 }
 </style>

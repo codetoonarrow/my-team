@@ -4,7 +4,7 @@
 
     import { fly, fade } from 'svelte/transition';
     import { createEventDispatcher } from 'svelte';
-    import { onMount } from 'svelte';
+
     import { dataset_dev } from 'svelte/internal';
     export let teamName;
     export let id;
@@ -16,7 +16,7 @@
     let selectedYear = 2018
     let items = [2018, 2019, 2020, 2021]
 
-    async function getWins(combinedSeasonYear = 2021){
+    async function getWins(combinedSeasonYear = 20212022){
         console.log("Ran in getWins func" + " " + combinedSeasonYear)
         const res = await fetch(`https://statsapi.web.nhl.com/api/v1/schedule?season=${combinedSeasonYear}`)
         const wins = await res.json()
@@ -31,15 +31,8 @@
                 }
             }
         }
+        console.log(res)
     }
-
-//     onMount(async () => {
-//         gameResults = await getWins(); // fetch initial data
-
-//     const interval = setInterval(async () => {
-//         gameResults = await getWins(); // fetch updated data
-//     }, 5000); // replace with desired interval in ms
-//   });
 
     // The NHL API requires that if a season is to be returned it needs to be the year and the year following
     // For example: Season of 2018 would be "20182019"
@@ -53,7 +46,10 @@
             getWins(combinedSeasonYear)
         }   
     }
-
+//TODO
+//Upon selection from dropdown call get wins function
+//Update the url
+//Rerender the chart component
     let result = seasonYear(2021)
     console.log(result)
 // console.log(combinedSeasonYear)
@@ -97,15 +93,15 @@
         {#await wins}
             loading
         {:then}
-            {console.log(wins)}
             <h3>{selectedYear} Season</h3>
             <Chart outcome={gameResults} />
         {/await}
+        
         <button on:click={ () => {
             dispatch('close');
         }}
-        
         >Close</button>  
+
         <select bind:value={selectedYear} on:change="{async (event) => await seasonYear(parseInt(event.target.value))}">
             {#each items as item}
                 <option value={item}>{item}</option>
