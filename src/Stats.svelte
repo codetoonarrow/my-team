@@ -21,8 +21,16 @@ let scroll
    async function getStats(){
         const res = await fetch("https://statsapi.web.nhl.com/api/v1/standings?hydrate=record(overall),division,conference,team(nextSchedule(team),previousSchedule(team))&season=20212022&site=en_nhl")
         const stats = await res.json();
-       console.log(stats.records[0].teamRecords.team.name)
+    //    console.log(stats.records[0].teamRecords)
+        pickRandomTeam(stats)
         return stats;
+    }
+
+    function pickRandomTeam(stats){
+        console.log(stats)
+        for(let i = 0; i < stats.records.length; i++){
+            console.log(stats.records[i])
+        }
     }
 
     function closeModal(){
