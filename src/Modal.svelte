@@ -52,33 +52,41 @@
 //Rerender the chart component
     let result = seasonYear(2021)
     console.log(result)
-// console.log(combinedSeasonYear)
+/
     //Plots the results of the wins and losses to  chart
-    function updateOutcome(linePoint){
-        let result
-        let finalResult
-        let combineString
+    // function updateOutcome(linePoint){
+    //     let result
+    //     let finalResult
+    //     let combineString
 
-        if (linePoint === "WIN") {
-            finalResult = yAxis + " ," + " 0"
-            result = parseInt(yAxis)
-            result += 5
-            finalResult = result.toString()
-            combineString = finalResult + " ," + " 0"
-            yAxis = result
-            gameResults.push(combineString)
-        } else if (linePoint === "LOSS"){
-            finalResult = yAxis + " ," + " 100"
-            result = parseInt(yAxis)
-            result += 5
-            finalResult = result.toString()
-            combineString = finalResult + " ," + " 100"
-            yAxis = result
-            gameResults.push(combineString)
-        }
-    }
+    //     if (linePoint === "WIN") {
+    //         finalResult = yAxis + " ," + " 0"
+    //         result = parseInt(yAxis)
+    //         result += 5
+    //         finalResult = result.toString()
+    //         combineString = finalResult + " ," + " 0"
+    //         yAxis = result
+    //         gameResults.push(combineString)
+    //     } else if (linePoint === "LOSS"){
+    //         finalResult = yAxis + " ," + " 100"
+    //         result = parseInt(yAxis)
+    //         result += 5
+    //         finalResult = result.toString()
+    //         combineString = finalResult + " ," + " 100"
+    //         yAxis = result
+    //         gameResults.push(combineString)
+    //     }
+    // }
   
-
+function updateOutcome(linePoint){
+    const result = parseInt(yAxis) + 5
+    const secondCoordinate = linePoint === "WIN" ? "0" : "100";
+  const finalResult = `${result}, ${secondCoordinate}`;
+  const combineString = `${finalResult}, ${secondCoordinate}`;
+  yAxis = result.toString();
+  gameResults.push(combineString);
+  return combineString;
+}
     // Custom event for when the close button is clicked within the Modal
     const dispatch = createEventDispatcher();
     
