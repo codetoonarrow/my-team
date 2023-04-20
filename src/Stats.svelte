@@ -33,7 +33,15 @@ let teamIds = []
             }
         }
     }
-
+    function generateRandomid(){
+        const num = Math.floor(Math.random() * 32);
+        console.log(num);
+        const random = teamIds.filter(function(num){
+            return num === teamIds
+        })
+        console.log(random)
+    }
+    generateRandomid()
     function closeModal(){
         modalIsOpen = false
     }
