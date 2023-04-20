@@ -12,7 +12,7 @@ let points
 let id
 let scroll
 
-
+let teamIds = []
 // https://statsapi.web.nhl.com/api/v1/schedule?season=20212022
 // API for past schedule
 // Loop over the dates compare the home and away score
@@ -22,14 +22,15 @@ let scroll
         const res = await fetch("https://statsapi.web.nhl.com/api/v1/standings?hydrate=record(overall),division,conference,team(nextSchedule(team),previousSchedule(team))&season=20212022&site=en_nhl")
         const stats = await res.json();
     //    console.log(stats.records[0].teamRecords)
-        pickRandomTeam(stats)
+        getTeamId(stats)
         return stats;
     }
 
-    function pickRandomTeam(stats){
-        console.log(stats)
+    function getTeamId(stats){
         for(let i = 0; i < stats.records.length; i++){
-            console.log(stats.records[i])
+            for(let j = 0; j < stats.records[i].teamRecords.length; j++){
+                teamIds.push(stats.records[i].teamRecords[j].team.id)
+            }
         }
     }
 
