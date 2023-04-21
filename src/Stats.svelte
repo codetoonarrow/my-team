@@ -12,7 +12,6 @@ let points
 let id
 let scroll
 
-let teamIds = []
 // https://statsapi.web.nhl.com/api/v1/schedule?season=20212022
 // API for past schedule
 // Loop over the dates compare the home and away score
@@ -21,27 +20,32 @@ let teamIds = []
    async function getStats(){
         const res = await fetch("https://statsapi.web.nhl.com/api/v1/standings?hydrate=record(overall),division,conference,team(nextSchedule(team),previousSchedule(team))&season=20212022&site=en_nhl")
         const stats = await res.json();
-    //    console.log(stats.records[0].teamRecords)
-        getTeamId(stats)
+        getTeamIds(stats)
         return stats;
     }
 
-    function getTeamId(stats){
+    function getTeamIds(stats){
         for(let i = 0; i < stats.records.length; i++){
             for(let j = 0; j < stats.records[i].teamRecords.length; j++){
                 teamIds.push(stats.records[i].teamRecords[j].team.id)
             }
         }
+        return teamIds
     }
-    function generateRandomid(){
-        const num = Math.floor(Math.random() * 32);
-        console.log(num);
-        const random = teamIds.filter(function(num){
-            return num === teamIds
-        })
-        console.log(random)
+
+    async function generateRandomid(){
+        const stats = await getStats()
+        const teamIds = getTeamIds(stats)
+        const randomNumber = Math.floor(Math.random() * teamIds.length);
+        return teamIds[randomNumber]
     }
-    generateRandomid()
+    let teamIds = []
+
+    generateRandomid().then((randomTeamId) =>{
+        console.log(randomTeamId)
+    })
+
+    
     function closeModal(){
         modalIsOpen = false
     }
