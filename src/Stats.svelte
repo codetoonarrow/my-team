@@ -39,7 +39,7 @@ let scroll
     }
 
     let teamIds = []
-    
+
     generateRandomid().then((randomTeamId) =>{
         console.log(randomTeamId)
     })
@@ -90,12 +90,11 @@ let scroll
             {/each}
         </DivisionCard> 
      {/each}
-
 {/await}
-{#if modalIsOpen}
-<Modal on:close={closeModal} teamName={teamName} rank={rank} points={points} id={id}/>  
-{/if}
 
+{#if modalIsOpen}
+    <Modal on:close={closeModal} teamName={teamName} rank={rank} points={points} id={id}/>  
+{/if}
 
 <style>
     .search-box{

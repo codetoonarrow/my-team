@@ -8,22 +8,27 @@
 
 <main>
 	<!-- svelte-ignore a11y-img-redundant-alt -->
-	<img src={src} alt="background image" />
-	<Header />
-	<Stats />
-	<Footer />
+	<div class="container">
+		<img src={src} alt="background image" />
+		<Header />
+		<Stats />
+		<Footer />
+	</div>
 </main>
 
 <style>
-
+.container {
+	position: relative;
+ 	min-height: 100vh;
+}
 img {
 	position: absolute;
 	z-index: -100;
 	background-repeat: repeat-y;
-  	background-size: auto 100%;
-}
-
-main {
-	margin-bottom: 100vh;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-size: cover;
 }
 </style>
