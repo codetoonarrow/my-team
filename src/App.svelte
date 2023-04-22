@@ -21,6 +21,7 @@
 	position: relative;
  	min-height: 100vh;
 }
+
 img {
 	position: absolute;
 	z-index: -100;

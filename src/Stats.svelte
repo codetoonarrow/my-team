@@ -1,7 +1,9 @@
 <script>
+import { get, writable } from 'svelte/store';
 import Card from './Team-Card.svelte';
 import DivisionCard from './DivisionCard.svelte';
 import Modal from './Modal.svelte';
+import Showcase from './Showcase.svelte';
 
 let stats = getStats()
 let modalIsOpen = false
@@ -39,12 +41,13 @@ let scroll
     }
 
     let teamIds = []
+    let result = writable(null);
 
-    generateRandomid().then((randomTeamId) =>{
-        console.log(randomTeamId)
+        generateRandomid().then((randomTeamId) =>{
+            result.set(randomTeamId)
     })
 
-    
+ 
     function closeModal(){
         modalIsOpen = false
     }
@@ -58,6 +61,10 @@ let scroll
     }
 
 </script>
+{#if $result !== null}
+    <Showcase>{$result}</Showcase>    
+{/if}
+
 
 <svelte:window bind:scrollY={scroll}/>
 <div class="search-box">
