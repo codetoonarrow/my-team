@@ -1,4 +1,6 @@
 <script>
+// https://statsapi.web.nhl.com/api/v1/schedule?season=20212022
+// API for past schedule
 import { get, writable } from 'svelte/store';
 import Card from './Team-Card.svelte';
 import DivisionCard from './DivisionCard.svelte';
@@ -14,8 +16,7 @@ let points
 let id
 let scroll
 
-// https://statsapi.web.nhl.com/api/v1/schedule?season=20212022
-// API for past schedule
+//Todo: Match random id to team and display stats related to team
 
    async function getStats(){
         const res = await fetch("https://statsapi.web.nhl.com/api/v1/standings?hydrate=record(overall),division,conference,team(nextSchedule(team),previousSchedule(team))&season=20212022&site=en_nhl")
@@ -61,10 +62,10 @@ let scroll
     }
 
 </script>
+
 {#if $result !== null}
     <Showcase>{$result}</Showcase>    
 {/if}
-
 
 <svelte:window bind:scrollY={scroll}/>
 <div class="search-box">
