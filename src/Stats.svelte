@@ -28,10 +28,23 @@ let scroll
     function getTeamIds(stats){
         for(let i = 0; i < stats.records.length; i++){
             for(let j = 0; j < stats.records[i].teamRecords.length; j++){
+                
                 teamIds.push(stats.records[i].teamRecords[j].team.id)
             }
         }
         return teamIds
+    }
+
+    //Generate Random ID number
+    //If the number is equal to an ID from the API return the team name 
+    function checkId(stats, result){
+        for(let i = 0; i < stats.records.length; i++){
+            for(let j = 0; j < stats.records[i].teamRecords.length; j++){
+                if (result === stats.records[i].teamRecords[j].team.name) {
+                    console.log(stats.records[i].teamRecords[j].team.name)
+                }
+            }
+        }
     }
 
     async function generateRandomid(){
@@ -46,6 +59,7 @@ let scroll
 
         generateRandomid().then((randomTeamId) =>{
             result.set(randomTeamId)
+            checkId(stats, result)
     })
 
  
