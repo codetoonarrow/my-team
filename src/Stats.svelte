@@ -25,26 +25,21 @@ let scroll
         return stats;
     }
 
+    let teamIds = []
     function getTeamIds(stats){
+          
         for(let i = 0; i < stats.records.length; i++){
             for(let j = 0; j < stats.records[i].teamRecords.length; j++){
+                const teamId = stats.records[i].teamRecords[j].team.id;
+            if(!teamIds.includes(teamId)){
+                console.log(stats.records[i].teamRecords[j].team.id);
+                teamIds.push(teamId);
                 
-                teamIds.push(stats.records[i].teamRecords[j].team.id)
+            }
             }
         }
+        console.log(teamIds);
         return teamIds
-    }
-
-    //Generate Random ID number
-    //If the number is equal to an ID from the API return the team name 
-    function checkId(stats, result){
-        for(let i = 0; i < stats.records.length; i++){
-            for(let j = 0; j < stats.records[i].teamRecords.length; j++){
-                if (result === stats.records[i].teamRecords[j].team.name) {
-                    console.log(stats.records[i].teamRecords[j].team.name)
-                }
-            }
-        }
     }
 
     async function generateRandomid(){
@@ -54,12 +49,24 @@ let scroll
         return teamIds[randomNumber]
     }
 
-    let teamIds = []
+  
     let result = writable(null);
 
+    //Generate Random ID number
+    //If the number is equal to an ID from the API return the team name 
+//     function checkId(stats){
+//         console.log(stats)
+//         for(let i = 0; i < stats.records.length; i++){
+//             for(let j = 0; j < stats.records[i].teamRecords.length; j++){
+//                 if (result === stats.records[i].teamRecords[j].team.name) {
+//                     console.log(stats.records[i].teamRecords[j].team.name)
+//                 }
+//             }
+//         }
+//     }
+// checkId(stats)
         generateRandomid().then((randomTeamId) =>{
             result.set(randomTeamId)
-            checkId(stats, result)
     })
 
  
