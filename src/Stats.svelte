@@ -21,7 +21,7 @@ let scroll
    async function getStats(){
         const res = await fetch("https://statsapi.web.nhl.com/api/v1/standings?hydrate=record(overall),division,conference,team(nextSchedule(team),previousSchedule(team))&season=20212022&site=en_nhl")
         const stats = await res.json();
-        getTeamIds(stats)
+        // getTeamIds(stats)
         return stats;
     }
 
