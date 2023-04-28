@@ -8,7 +8,6 @@ import DivisionCard from './DivisionCard.svelte';
 import Modal from './Modal.svelte';
 import Showcase from './Showcase.svelte';
 
-// let stats = getStats()
 let modalIsOpen = false
 let search
 let teamName
@@ -18,22 +17,45 @@ let id
 let scroll
 let stats = []
 
+//Call the NHL API and put the response into localstorage as a JSON Object
 const fetchData = async () => {
     const response = await fetch("https://statsapi.web.nhl.com/api/v1/standings?hydrate=record(overall),division,conference,team(nextSchedule(team),previousSchedule(team))&season=20212022&site=en_nhl")
     stats = await response.json()
-    localStorage.setItem("stats", JSON.stringify(stats))
+    localStorage.setItem('stats', JSON.stringify(stats))
 }
 
-onMount(() => {
-    const storedData = localStorage.getItem("stats")
+// When the site loads check to make sure that the localstorage is not stale data or doubling up
+onMount(async () => {
+    const storedData = localStorage.getItem('stats')
     if (storedData) {
         stats = JSON.parse(storedData)
-        console.log("this is the local storage " + stats)
+        console.log("hey" + storedData)
     } else {
-        fetchData()
+        await fetchData()
     }
 })
 
+// 
+function getStats(){
+    let statsArray = []
+
+    Object.keys(localStorage).forEach(function(key){
+        if(key.startsWith('api_call_')){
+            let apiCall = JSON.parse(localStorage.getItem(key))
+            statsArray.push({
+                endpoint: apiCall.endpoint,
+                timestamp: apiCall.timestamp,
+                responseTime: apiCall.responseTime
+            })
+        }
+    })
+    return statsArray
+}
+const statsArray = JSON.parse(localStorage.getItem('stats'));
+getStats()
+// const statsArray = getStats()
+// localStorage.setItem('stats', JSON.stringify(statsArray))
+// console.log(localStorage)
 //    async function getStats(){
 //         const res = await fetch("https://statsapi.web.nhl.com/api/v1/standings?hydrate=record(overall),division,conference,team(nextSchedule(team),previousSchedule(team))&season=20212022&site=en_nhl")
 //         const stats = await res.json();
@@ -58,22 +80,9 @@ onMount(() => {
         const teamIds = getTeamIds(stats)
         const randomNumber = Math.floor(Math.random() * teamIds.length);
         const randomTeamID = teamIds[randomNumber]
-        console.log("This is the random team ID " + randomTeamID)
         return randomTeamID
     }
 
-    // async function getRandomTeamDetails(randomTeamID) {
-    //     const stats = await getStats()
-    //     for(let i = 0; stats.records.length; i++ ){
-    //         const teamId = stats.records[i].teamRecords[j].team.id
-    //         for(let j = 0; j < stats.records[i].teamRecords.length; j++){
-    //             if(teamId === randomTeamID) {
-    //                 console.log(stats.records[i].teamRecords[j].team.name)
-    //             }
-    //         }
-    //     }
-    // }
-  
     let result = writable(null);
 
         generateRandomid().then((randomTeamId) =>{
@@ -102,7 +111,7 @@ onMount(() => {
 <div class="search-box">
     <input class="search-bar" placeholder="Search for team" bind:value={search} type="text">
 </div>
-{#await stats}
+{#await statsArray}
     loading
 {:then response}
 
