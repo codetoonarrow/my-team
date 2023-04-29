@@ -76,7 +76,7 @@ getStats()
     }
 
     async function generateRandomid(){
-        const stats = await fetchData()
+        const stats = JSON.parse(localStorage.getItem('stats'));
         const teamIds = getTeamIds(stats)
         const randomNumber = Math.floor(Math.random() * teamIds.length);
         const randomTeamID = teamIds[randomNumber]
