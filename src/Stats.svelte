@@ -112,11 +112,7 @@ getStats()
 <div class="search-box">
     <input class="search-bar" placeholder="Search for team" bind:value={search} type="text">
 </div>
-<select bind:value={selectedYear} >
-    {#each rangeOfYears as year}
-        <option value={year}>{year}</option>
-    {/each}
-</select>
+
 {#await statsArray}
     loading
 {:then response}
