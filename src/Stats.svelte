@@ -16,6 +16,8 @@ let points
 let id
 let scroll
 let stats = []
+let selectedYear = 2018
+let rangeOfYears = [2018,2019,2020,2021]
 
 //Call the NHL API and put the response into localstorage as a JSON Object
 const fetchData = async () => {
@@ -29,7 +31,6 @@ onMount(async () => {
     const storedData = localStorage.getItem('stats')
     if (storedData) {
         stats = JSON.parse(storedData)
-        console.log("hey" + storedData)
     } else {
         await fetchData()
     }
@@ -111,6 +112,11 @@ getStats()
 <div class="search-box">
     <input class="search-bar" placeholder="Search for team" bind:value={search} type="text">
 </div>
+<select bind:value={selectedYear} >
+    {#each rangeOfYears as year}
+        <option value={year}>{year}</option>
+    {/each}
+</select>
 {#await statsArray}
     loading
 {:then response}
