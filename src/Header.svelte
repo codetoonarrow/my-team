@@ -42,14 +42,14 @@
 }
 .header{
     display: inline-flex;
-    background:#B7CECE;
+    background:#1985A1;
     width: 100%;
     border-bottom: 1px solid #272729;
 }
 .sun{
     display: inline-flex;
     float:right;
-    color: #69A197;
+    color: #E9CE2C;
     font-size: 20px;
     position: absolute;
 	}

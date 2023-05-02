@@ -11,7 +11,7 @@
         text-align: center;
     }
     .footer-wrapper {
-        background-color: #B7CECE;
+        background-color: #1985A1;
         color: white;
         position: absolute;
         bottom: 0;
