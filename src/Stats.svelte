@@ -7,6 +7,7 @@ import Card from './Team-Card.svelte';
 import DivisionCard from './DivisionCard.svelte';
 import Modal from './Modal.svelte';
 import Showcase from './Showcase.svelte';
+  import { each } from 'svelte/internal';
 
 let modalIsOpen = false
 let search
@@ -16,27 +17,34 @@ let points
 let id
 let scroll
 let stats = []
-let selectedYear = 2018
-let rangeOfYears = [2018,2019,2020,2021]
 
 //Call the NHL API and put the response into localstorage as a JSON Object
 const fetchData = async () => {
+    
+    console.log('Fetching data... ⏳');
+
     const response = await fetch("https://statsapi.web.nhl.com/api/v1/standings?hydrate=record(overall),division,conference,team(nextSchedule(team),previousSchedule(team))&season=20212022&site=en_nhl")
-    stats = await response.json()
+    const stats = await response.json()
+
+    console.log('Data received: ✅', stats);
+
     localStorage.setItem('stats', JSON.stringify(stats))
+    console.log('Stats set:', stats);
 }
 
 // When the site loads check to make sure that the localstorage is not stale data or doubling up
 onMount(async () => {
     const storedData = localStorage.getItem('stats')
+    console.log()
     if (storedData) {
+        fetchData()
         stats = JSON.parse(storedData)
     } else {
+
         await fetchData()
     }
 })
 
-// 
 function getStats(){
     let statsArray = []
 
@@ -104,9 +112,9 @@ getStats()
 
 </script>
 
-{#if $result !== null}
+<!-- {#if $result !== null}
     <Showcase>{$result}</Showcase>    
-{/if}
+{/if} -->
 
 <svelte:window bind:scrollY={scroll}/>
 <div class="search-box">
