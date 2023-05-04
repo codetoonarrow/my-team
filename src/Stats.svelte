@@ -174,6 +174,10 @@ getStats()
     .card-wrapper{
         cursor:pointer;
     }
+    .team-logo{
+        width: 2%;
+        height: auto;
+    }
     h4{
         display: inline-block;
         margin:0;
