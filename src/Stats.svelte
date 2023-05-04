@@ -137,6 +137,7 @@ getStats()
                             id = team.team.id
                         ))}>
                         <Card>
+                            <img class="team-logo" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{team.team.id}.svg" alt="{teamName} Logo">
                             <h4>{team.team.name}</h4>
                             <h4>Wins: {team.leagueRecord.wins} | </h4>
                             <h4>Losses: {team.leagueRecord.losses} | </h4>
