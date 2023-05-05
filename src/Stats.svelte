@@ -7,7 +7,8 @@ import Card from './Team-Card.svelte';
 import DivisionCard from './DivisionCard.svelte';
 import Modal from './Modal.svelte';
 import Showcase from './Showcase.svelte';
-  import { each } from 'svelte/internal';
+import { each } from 'svelte/internal';
+import Puck from './Puck.svelte';
 
 let modalIsOpen = false
 let search
@@ -175,7 +176,7 @@ getStats()
         cursor:pointer;
     }
     .team-logo{
-        width: 2%;
+        width: 3.5%;
         height: auto;
     }
     h4{

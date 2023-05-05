@@ -17,7 +17,7 @@
     let items = [2018, 2019, 2020, 2021]
 
     async function getWins(combinedSeasonYear = 20212022){
-        console.log("Ran in getWins func" + " " + combinedSeasonYear)
+
         const res = await fetch(`https://statsapi.web.nhl.com/api/v1/schedule?season=${combinedSeasonYear}`)
         const wins = await res.json()
         const results = wins.dates
@@ -26,13 +26,19 @@
             for (let j = 0; j < obj.length; j++){
                 if (obj[j].teams.home.team.id === id && obj[j].teams.home.score > obj[j].teams.away.score || obj[j].teams.away.team.id === id && obj[j].teams.away.score > obj[j].teams.home.score) {
                     updateOutcome("WIN")
+                    console.log(obj[j].gameDate)
                 }else if (obj[j].teams.home.team.id === id && obj[j].teams.home.score < obj[j].teams.away.score || obj[j].teams.away.team.id === id && obj[j].teams.away.score < obj[j].teams.home.score){
                     updateOutcome("LOSS")
                 }
+    
             }
         }
-        console.log(res)
     }
+
+    //Get the dates from the api
+    // Only return the dates that are associated with the team id that was selected
+    // For this date is there a team with this id
+    // Plot those dates
 
     // The NHL API requires that if a season is to be returned it needs to be the year and the year following
     // For example: Season of 2018 would be "20182019"
@@ -51,7 +57,6 @@
 //Update the url
 //Rerender the chart component
     let result = seasonYear(2021)
-    console.log(result)
 
     //Plots the results of the wins and losses to  chart
     // TODO Simplify this function
