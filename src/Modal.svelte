@@ -15,6 +15,7 @@
     let yAxis = 0
     let selectedYear = 2018
     let items = [2018, 2019, 2020, 2021]
+    let datesArray = []
 
     async function getWins(combinedSeasonYear = 20212022){
 
@@ -26,7 +27,7 @@
             for (let j = 0; j < obj.length; j++){
                 if (obj[j].teams.home.team.id === id && obj[j].teams.home.score > obj[j].teams.away.score || obj[j].teams.away.team.id === id && obj[j].teams.away.score > obj[j].teams.home.score) {
                     updateOutcome("WIN")
-                    console.log(obj[j].gameDate)
+                    cleanDateString(obj[j].gameDate)
                 }else if (obj[j].teams.home.team.id === id && obj[j].teams.home.score < obj[j].teams.away.score || obj[j].teams.away.team.id === id && obj[j].teams.away.score < obj[j].teams.home.score){
                     updateOutcome("LOSS")
                 }
@@ -85,6 +86,10 @@
         }
     }
   
+    async function cleanDateString(str){
+        const result = await str.split("T")[0]
+        datesArray.push(result)
+    }
 
     // Custom event for when the close button is clicked within the Modal
     const dispatch = createEventDispatcher();
