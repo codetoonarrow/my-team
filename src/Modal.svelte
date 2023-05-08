@@ -1,24 +1,25 @@
 <script>
  
     import Chart from './Chart.svelte';
-
+    import { onMount, onDestroy, afterUpdate } from 'svelte';
+    import { writable } from 'svelte/store';
     import { fly, fade } from 'svelte/transition';
     import { createEventDispatcher } from 'svelte';
 
-    import { dataset_dev } from 'svelte/internal';
     export let teamName;
     export let id;
-    // export let rank;
-    // export let points;
+    export let rank;
+    export let points;
+    let gameResults = [];
+
+    let outcome = ''
     let wins = getWins();
-    let gameResults = []
     let yAxis = 0
     let selectedYear = 2018
     let items = [2018, 2019, 2020, 2021]
     let datesArray = []
 
     async function getWins(combinedSeasonYear = 20212022){
-
         const res = await fetch(`https://statsapi.web.nhl.com/api/v1/schedule?season=${combinedSeasonYear}`)
         const wins = await res.json()
         const results = wins.dates
@@ -27,19 +28,20 @@
             for (let j = 0; j < obj.length; j++){
                 if (obj[j].teams.home.team.id === id && obj[j].teams.home.score > obj[j].teams.away.score || obj[j].teams.away.team.id === id && obj[j].teams.away.score > obj[j].teams.home.score) {
                     updateOutcome("WIN")
-                    cleanDateString(obj[j].gameDate)
                 }else if (obj[j].teams.home.team.id === id && obj[j].teams.home.score < obj[j].teams.away.score || obj[j].teams.away.team.id === id && obj[j].teams.away.score < obj[j].teams.home.score){
                     updateOutcome("LOSS")
                 }
-    
             }
         }
     }
 
-    //Get the dates from the api
-    // Only return the dates that are associated with the team id that was selected
-    // For this date is there a team with this id
-    // Plot those dates
+    onMount(() => {
+        console.log(gameResults)
+    })
+
+    afterUpdate(() => {
+        console.log(gameResults)
+    })
 
     // The NHL API requires that if a season is to be returned it needs to be the year and the year following
     // For example: Season of 2018 would be "20182019"
@@ -49,24 +51,15 @@
         let seasonYearEnd = selectedYear + 1
         let addSeason = seasonYearStart.toString() + seasonYearEnd.toString()
         let combinedSeasonYear = Number(addSeason)
-        if(combinedSeasonYear > 0 ){
-            getWins(combinedSeasonYear)
-        }   
+        return combinedSeasonYear
     }
-//TODO
-//Upon selection from dropdown call get wins function
-//Update the url
-//Rerender the chart component
-    let result = seasonYear(2021)
 
     //Plots the results of the wins and losses to  chart
     // TODO Simplify this function
-
     function updateOutcome(linePoint){
         let result
         let finalResult
         let combineString
-
         if (linePoint === "WIN") {
             finalResult = yAxis + " ," + " 0"
             result = parseInt(yAxis)
@@ -90,7 +83,9 @@
         const result = await str.split("T")[0]
         datesArray.push(result)
     }
-
+function handleRender(){
+    return getWins(20192020)
+}
     // Custom event for when the close button is clicked within the Modal
     const dispatch = createEventDispatcher();
     
@@ -100,21 +95,22 @@
     <div class="modal" transition:fly={{ y: -100 }}>
         <h1 class="team-name">{teamName}</h1>
         <img class="team-logo" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{id}.svg" alt="{teamName} Logo">
-        <!-- <h3>League Rank: {rank}</h3>
-        <h3>Points: {points}</h3> -->
         {#await wins}
             loading
         {:then}
-            <h3>{selectedYear} Season</h3>
+            <h2>{selectedYear} Season</h2>
+            <h3>League Rank: {rank}</h3>
+            <h3>Points: {points}</h3>
             <Chart outcome={gameResults} />
         {/await}
-        
+        <button on:click={handleRender}>Rerender Comp</button>
+        <h3>Outcome: {selectedYear}</h3>
         <button on:click={ () => {
             dispatch('close');
         }}
         >Close</button>  
 
-        <select bind:value={selectedYear} on:change="{async (event) => await seasonYear(parseInt(event.target.value))}">
+        <select bind:value={selectedYear} on:change="{async (event) =>  getWins(seasonYear(parseInt(event.target.value)))}">
             {#each items as item}
                 <option value={item}>{item}</option>
             {/each}

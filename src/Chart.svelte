@@ -1,10 +1,7 @@
 <script>
 export let outcome;
-//If the game resulted in a Win 2nd point = 100
-//Else 2nd point = 0
-//For both outcomes 1st point +30
-
 </script>
+
 <div class="chart">
 	<svg width="600" height="100">
 		<!-- x axis -->
