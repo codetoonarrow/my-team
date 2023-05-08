@@ -61,19 +61,19 @@
         let finalResult
         let combineString
         if (linePoint === "WIN") {
-            finalResult = yAxis + " ," + " 0"
+            finalResult = `${yAxis}, 0`
             result = parseInt(yAxis)
             result += 5
             finalResult = result.toString()
-            combineString = finalResult + " ," + " 0"
+            combineString = `${finalResult}, 0`
             yAxis = result
             gameResults.push(combineString)
         } else if (linePoint === "LOSS"){
-            finalResult = yAxis + " ," + " 100"
+            finalResult = `${yAxis}, 100`
             result = parseInt(yAxis)
             result += 5
             finalResult = result.toString()
-            combineString = finalResult + " ," + " 100"
+            combineString = `${finalResult}, 100`
             yAxis = result
             gameResults.push(combineString)
         }
