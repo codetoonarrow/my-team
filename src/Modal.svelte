@@ -58,22 +58,20 @@
     // TODO Simplify this function
     function updateOutcome(gameOutcome){
         let movePoint
-        let finalResult
-        let combineString
+        let chartCoordinates
         if (gameOutcome === "WIN") {
-            finalResult = `${yAxis}, 0`
+            //Moves the line 5 points up the axis
             movePoint = parseInt(yAxis) + 5
-            finalResult = movePoint.toString()
-            combineString = `${finalResult}, 0`
+            // Chart function only takes type of str not num, convert the calculated num
+            chartCoordinates = `${movePoint.toString()}, 0`
+            // Store the result, when the loop iterates again it will refrence this yaxis to move it forward 
             yAxis = movePoint
-            gameResults.push(combineString)
+            gameResults.push(chartCoordinates)
         } else if (gameOutcome === "LOSS"){
-            finalResult = `${yAxis}, 100`
             movePoint = parseInt(yAxis) + 5
-            finalResult = movePoint.toString()
-            combineString = `${finalResult}, 100`
+            chartCoordinates = `${movePoint.toString()}, 100`
             yAxis = movePoint
-            gameResults.push(combineString)
+            gameResults.push(chartCoordinates)
         }
     }
   
