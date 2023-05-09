@@ -56,25 +56,23 @@
 
     //Plots the results of the wins and losses to  chart
     // TODO Simplify this function
-    function updateOutcome(linePoint){
-        let result
+    function updateOutcome(gameOutcome){
+        let movePoint
         let finalResult
         let combineString
-        if (linePoint === "WIN") {
+        if (gameOutcome === "WIN") {
             finalResult = `${yAxis}, 0`
-            result = parseInt(yAxis)
-            result += 5
-            finalResult = result.toString()
+            movePoint = parseInt(yAxis) + 5
+            finalResult = movePoint.toString()
             combineString = `${finalResult}, 0`
-            yAxis = result
+            yAxis = movePoint
             gameResults.push(combineString)
-        } else if (linePoint === "LOSS"){
+        } else if (gameOutcome === "LOSS"){
             finalResult = `${yAxis}, 100`
-            result = parseInt(yAxis)
-            result += 5
-            finalResult = result.toString()
+            movePoint = parseInt(yAxis) + 5
+            finalResult = movePoint.toString()
             combineString = `${finalResult}, 100`
-            yAxis = result
+            yAxis = movePoint
             gameResults.push(combineString)
         }
     }
