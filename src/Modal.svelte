@@ -12,17 +12,17 @@
     export let points;
     let gameResults = [];
 
-    let outcome = ''
     let wins = getWins();
     let yAxis = 0
     let selectedYear = 2018
     let items = [2018, 2019, 2020, 2021]
-    let datesArray = []
+    let datesArray = [0]
 
     async function getWins(combinedSeasonYear = 20212022){
         const res = await fetch(`https://statsapi.web.nhl.com/api/v1/schedule?season=${combinedSeasonYear}`)
         const wins = await res.json()
         const results = wins.dates
+        gameResults = []
         for (let i = 0; i  < results.length; i++){
             let obj = results[i].games
             for (let j = 0; j < obj.length; j++){
@@ -35,14 +35,6 @@
         }
     }
 
-    onMount(() => {
-        console.log(gameResults)
-    })
-
-    afterUpdate(() => {
-        console.log(gameResults)
-    })
-
     // The NHL API requires that if a season is to be returned it needs to be the year and the year following
     // For example: Season of 2018 would be "20182019"
     // This function takes a selected year as a string and appends the next year
@@ -54,15 +46,21 @@
         return combinedSeasonYear
     }
 
+    function cleanUpChart(){
+        gameResults = [];
+        return gameResults
+    }
+
     //Plots the results of the wins and losses to  chart
     // TODO Simplify this function
     function updateOutcome(gameOutcome){
         let movePoint
         let chartCoordinates
         if (gameOutcome === "WIN") {
-            //Moves the line 5 points up the axis
+            //Moves the yAxis 5 points up the yaxis
             movePoint = parseInt(yAxis) + 5
             // Chart function only takes type of str not num, convert the calculated num
+            // A win is represented by being at the "0" of the xAxis
             chartCoordinates = `${movePoint.toString()}, 0`
             // Store the result, when the loop iterates again it will refrence this yaxis to move it forward 
             yAxis = movePoint
@@ -106,7 +104,7 @@ function handleRender(){
         }}
         >Close</button>  
 
-        <select bind:value={selectedYear} on:change="{async (event) =>  getWins(seasonYear(parseInt(event.target.value)))}">
+        <select bind:value={selectedYear} on:change="{(event) => getWins(seasonYear(parseInt(event.target.value)))}">
             {#each items as item}
                 <option value={item}>{item}</option>
             {/each}
