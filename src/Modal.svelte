@@ -17,6 +17,7 @@
     let selectedYear = 2018
     let items = [2018, 2019, 2020, 2021]
     let datesArray = [0]
+    let counter = 0
 
     async function getWins(combinedSeasonYear = 20212022){
         const res = await fetch(`https://statsapi.web.nhl.com/api/v1/schedule?season=${combinedSeasonYear}`)
@@ -46,11 +47,6 @@
         return combinedSeasonYear
     }
 
-    function cleanUpChart(){
-        gameResults = [];
-        return gameResults
-    }
-
     //Plots the results of the wins and losses to  chart
     // TODO Simplify this function
     function updateOutcome(gameOutcome){
@@ -69,10 +65,10 @@
             movePoint = parseInt(yAxis) + 5
             chartCoordinates = `${movePoint.toString()}, 100`
             yAxis = movePoint
-            gameResults.push(chartCoordinates)
+            gameResults.push(chartCoordinates)   
         }
     }
-  
+    
     async function cleanDateString(str){
         const result = await str.split("T")[0]
         datesArray.push(result)
@@ -95,9 +91,11 @@ function handleRender(){
             <h2>{selectedYear} Season</h2>
             <h3>League Rank: {rank}</h3>
             <h3>Points: {points}</h3>
-            <Chart outcome={gameResults} />
+            {#key gameResults}
+                <Chart outcome={gameResults} />
+            {/key}
         {/await}
-        <button on:click={handleRender}>Rerender Comp</button>
+        <button on:click={() => counter++}>Rerender Comp</button>
         <h3>Outcome: {selectedYear}</h3>
         <button on:click={ () => {
             dispatch('close');

@@ -1,8 +1,23 @@
 <script>
-export let outcome;
-</script>
+export let outcome; 
+import { fade } from 'svelte/transition';
+let visible = true;
 
-<div class="chart">
+// $: if (outcome) {
+// 	const element = document.querySelector(".chart");
+// 	if (element){
+// 		element.remove()
+// 		element.appendChild(outcome)
+// 	};
+// }
+
+$: {
+	
+	console.table(`${outcome}`)
+}
+</script>
+{#if visible}
+<div transition:fade class="chart">
 	<svg width="600" height="100">
 		<!-- x axis -->
 		<line x1="0" x2="600" y1="100" y2="100"></line>
@@ -18,6 +33,7 @@ export let outcome;
 		<polyline style="stroke: #ef6351; stroke-width: 3" points={outcome}></polyline>
 	</svg>
 </div>
+{/if}
 <style>
 	svg {
 		overflow: visible;
