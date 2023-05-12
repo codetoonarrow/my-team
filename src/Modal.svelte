@@ -17,13 +17,13 @@
     let selectedYear = 2018
     let items = [2018, 2019, 2020, 2021]
     let datesArray = [0]
-    let counter = 0
 
     async function getWins(combinedSeasonYear = 20212022){
         const res = await fetch(`https://statsapi.web.nhl.com/api/v1/schedule?season=${combinedSeasonYear}`)
         const wins = await res.json()
         const results = wins.dates
         gameResults = []
+        yAxis = 0
         for (let i = 0; i  < results.length; i++){
             let obj = results[i].games
             for (let j = 0; j < obj.length; j++){
@@ -85,22 +85,24 @@ function handleRender(){
     <div class="modal" transition:fly={{ y: -100 }}>
         <h1 class="team-name">{teamName}</h1>
         <img class="team-logo" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{id}.svg" alt="{teamName} Logo">
+        
         {#await wins}
-            loading
+            loading...
         {:then}
+
             <h2>{selectedYear} Season</h2>
             <h3>League Rank: {rank}</h3>
             <h3>Points: {points}</h3>
+
             {#key gameResults}
                 <Chart outcome={gameResults} />
             {/key}
+
         {/await}
-        <button on:click={() => counter++}>Rerender Comp</button>
+
         <h3>Outcome: {selectedYear}</h3>
-        <button on:click={ () => {
-            dispatch('close');
-        }}
-        >Close</button>  
+        
+        <button on:click={ () => dispatch('close')}>Close</button>  
 
         <select bind:value={selectedYear} on:change="{(event) => getWins(seasonYear(parseInt(event.target.value)))}">
             {#each items as item}

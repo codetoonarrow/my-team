@@ -18,13 +18,15 @@ let points
 let id
 let scroll
 let stats = []
+let years = [2018, 2019, 2020, 2021]
+let selectedYear 
 
 //Call the NHL API and put the response into localstorage as a JSON Object
-const fetchData = async () => {
+async function fetchData(selectedYear = 20152016){
     
     console.log('Fetching data... ⏳');
 
-    const response = await fetch("https://statsapi.web.nhl.com/api/v1/standings?hydrate=record(overall),division,conference,team(nextSchedule(team),previousSchedule(team))&season=20212022&site=en_nhl")
+    const response = await fetch(`https://statsapi.web.nhl.com/api/v1/standings?hydrate=record(overall),division,conference,team(nextSchedule(team),previousSchedule(team))&season=${selectedYear}`)
     const stats = await response.json()
 
     console.log('Data received: ✅', stats);
@@ -122,33 +124,41 @@ getStats()
     <input class="search-bar" placeholder="Search for team" bind:value={search} type="text">
 </div>
 
+    <select name="Year Select Dropdown" id="year-select" bind:value={selectedYear} on:change={(event) => fetchData(event.target.value) }>
+        {#each years as year }
+            <option value="{year}">{year}</option>
+        {/each}
+    </select>
+
+
 {#await statsArray}
     loading
 {:then response}
 
      {#each response.records as division}
-        <DivisionCard>
-            <h1 class="division-name">Division: {division.division.name}</h1>
-            {#each division.teamRecords as team}
-                {#if !search || team.team.name.toLowerCase().includes(search.toLowerCase())}
-                    <div  class="card-wrapper" on:click={(handleClick(
-                            teamName = team.team.name, 
-                            rank = team.leagueRank, 
-                            points = team.points, 
-                            id = team.team.id
-                        ))}>
-                        <Card>
-                            <img class="team-logo" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{team.team.id}.svg" alt="{teamName} Logo">
-                            <h4>{team.team.name}</h4>
-                            <h4>Wins: {team.leagueRecord.wins} | </h4>
-                            <h4>Losses: {team.leagueRecord.losses} | </h4>
-                            <h4>OT: {team.leagueRecord.ot}</h4>
-                        </Card>
-                        
-                    </div>
-                {/if}
-            {/each}
-        </DivisionCard> 
+        {#key selectedYear}
+            <DivisionCard>
+                <h1 class="division-name">Division: {division.division.name}</h1>
+                {#each division.teamRecords as team}
+                    {#if !search || team.team.name.toLowerCase().includes(search.toLowerCase())}
+                        <div  class="card-wrapper" on:click={(handleClick(
+                                teamName = team.team.name, 
+                                rank = team.leagueRank, 
+                                points = team.points, 
+                                id = team.team.id
+                            ))}>
+                            <Card>
+                                <img class="team-logo" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{team.team.id}.svg" alt="{teamName} Logo">
+                                <h4>{team.team.name}</h4>
+                                <h4>Wins: {team.leagueRecord.wins} | </h4>
+                                <h4>Losses: {team.leagueRecord.losses} | </h4>
+                                <h4>OT: {team.leagueRecord.ot}</h4>
+                            </Card> 
+                        </div>
+                    {/if}
+                {/each}
+            </DivisionCard> 
+        {/key}
      {/each}
 {/await}
 

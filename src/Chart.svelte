@@ -3,21 +3,13 @@ export let outcome;
 import { fade } from 'svelte/transition';
 let visible = true;
 
-// $: if (outcome) {
-// 	const element = document.querySelector(".chart");
-// 	if (element){
-// 		element.remove()
-// 		element.appendChild(outcome)
-// 	};
-// }
-
 $: {
 	
 	console.table(`${outcome}`)
 }
 </script>
 {#if visible}
-<div transition:fade class="chart">
+<div>
 	<svg width="600" height="100">
 		<!-- x axis -->
 		<line x1="0" x2="600" y1="100" y2="100"></line>
