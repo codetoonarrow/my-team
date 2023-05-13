@@ -89,15 +89,10 @@ function handleRender(){
         {#await wins}
             loading...
         {:then}
-
             <h2>{selectedYear} Season</h2>
             <h3>League Rank: {rank}</h3>
             <h3>Points: {points}</h3>
-
-            {#key gameResults}
-                <Chart outcome={gameResults} />
-            {/key}
-
+            <Chart outcome={gameResults} />
         {/await}
 
         <h3>Outcome: {selectedYear}</h3>

@@ -1,6 +1,6 @@
 <script>
 export let outcome; 
-import { fade } from 'svelte/transition';
+
 let visible = true;
 
 $: {
