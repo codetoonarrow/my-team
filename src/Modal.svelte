@@ -92,7 +92,7 @@ function handleRender(){
             <h2>{selectedYear} Season</h2>
             <h3>League Rank: {rank}</h3>
             <h3>Points: {points}</h3>
-            <Chart outcome={gameResults} />
+            <Chart outcome={gameResults} /> 
         {/await}
 
         <h3>Outcome: {selectedYear}</h3>

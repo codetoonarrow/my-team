@@ -113,7 +113,7 @@ getStats()
         id = logoId
     }
 
-</script>
+</script>   
 
 <!-- {#if $result !== null}
     <Showcase>{$result}</Showcase>    
@@ -121,7 +121,8 @@ getStats()
 
 <svelte:window bind:scrollY={scroll}/>
 <div class="search-box">
-    <input class="search-bar" placeholder="Search for team" bind:value={search} type="text">
+    <label for="Search-Bar">Search</label>
+    <input class="search-bar" id="Search-bar" placeholder="Search for team" bind:value={search} type="search" name="search">
 </div>
 
     <select name="Year Select Dropdown" id="year-select" bind:value={selectedYear} on:change={(event) => fetchData(event.target.value) }>
