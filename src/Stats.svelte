@@ -50,7 +50,6 @@ onMount(async () => {
 
 function getStats(){
     let statsArray = []
-
     Object.keys(localStorage).forEach(function(key){
         if(key.startsWith('api_call_')){
             let apiCall = JSON.parse(localStorage.getItem(key))
@@ -113,6 +112,13 @@ getStats()
         id = logoId
     }
 
+    function seasonYear(selectedYear){
+        let seasonYearStart = selectedYear
+        let seasonYearEnd = selectedYear + 1
+        let addSeason = seasonYearStart.toString() + seasonYearEnd.toString()
+        let combinedSeasonYear = Number(addSeason)
+        return combinedSeasonYear
+    }
 </script>   
 
 <!-- {#if $result !== null}
@@ -125,7 +131,7 @@ getStats()
     <input class="search-bar" id="Search-bar" placeholder="Search for team" bind:value={search} type="search" name="search">
 </div>
 
-    <select name="Year Select Dropdown" id="year-select" bind:value={selectedYear} on:change={(event) => fetchData(event.target.value) }>
+    <select name="Year Select Dropdown" id="year-select" bind:value={selectedYear} on:change={(event) => fetchData(seasonYear(event.target.value))}>
         {#each years as year }
             <option value="{year}">{year}</option>
         {/each}

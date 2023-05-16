@@ -99,7 +99,7 @@ function handleRender(){
         
         <button on:click={ () => dispatch('close')}>Close</button>  
 
-        <select bind:value={selectedYear} on:change="{(event) => getWins(seasonYear(parseInt(event.target.value)))}">
+        <select bind:value={selectedYear} on:change={(event) => getWins(seasonYear(parseInt(event.target.value)))}>
             {#each items as item}
                 <option value={item}>{item}</option>
             {/each}
