@@ -9,8 +9,8 @@ $: {
 }
 </script>
 {#if visible}
-<div>
-	<svg width="600" height="100" role="img">
+<div class="chart">
+	<svg  width="600" height="100" role="img">
 		<!-- x axis -->
 		<line x1="0" x2="600" y1="100" y2="100"></line>
 		<g class="x" transform="translate(0,120)"></g>
