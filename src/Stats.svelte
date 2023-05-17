@@ -142,11 +142,11 @@ getStats()
     loading
 {:then response}
 
-     {#each response.records as division}
+     {#each response.records as division }
         {#key selectedYear}
             <DivisionCard>
                 <h1 class="division-name">Division: {division.division.name}</h1>
-                {#each division.teamRecords as team}
+                {#each division.teamRecords as team }
                     {#if !search || team.team.name.toLowerCase().includes(search.toLowerCase())}
                         <div  class="card-wrapper" on:click={(handleClick(
                                 teamName = team.team.name, 
@@ -155,11 +155,13 @@ getStats()
                                 id = team.team.id
                             ))}>
                             <Card>
+                                <div tabindex="0">
                                 <img class="team-logo" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{team.team.id}.svg" alt="{teamName} Logo">
                                 <h4>{team.team.name}</h4>
                                 <h4>Wins: {team.leagueRecord.wins} | </h4>
                                 <h4>Losses: {team.leagueRecord.losses} | </h4>
                                 <h4>OT: {team.leagueRecord.ot}</h4>
+                                </div>
                             </Card> 
                         </div>
                     {/if}
