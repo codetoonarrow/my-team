@@ -112,6 +112,16 @@ getStats()
         id = logoId
     }
 
+    function onKeydown(event,name, ranking, pointTally, logoId){
+        if(event === "Enter"){
+            modalIsOpen = true
+            teamName = name
+            rank = ranking
+            points = pointTally
+            id = logoId
+        }
+    }
+
     function seasonYear(selectedYear){
         let seasonYearStart = selectedYear
         let seasonYearEnd = selectedYear + 1
@@ -120,10 +130,6 @@ getStats()
         return combinedSeasonYear
     }
 </script>   
-
-<!-- {#if $result !== null}
-    <Showcase>{$result}</Showcase>    
-{/if} -->
 
 <svelte:window bind:scrollY={scroll}/>
 <div class="search-box">
@@ -155,12 +161,12 @@ getStats()
                                 id = team.team.id
                             ))}>
                             <Card>
-                                <div tabindex="0">
-                                <img class="team-logo" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{team.team.id}.svg" alt="{teamName} Logo">
-                                <h4>{team.team.name}</h4>
-                                <h4>Wins: {team.leagueRecord.wins} | </h4>
-                                <h4>Losses: {team.leagueRecord.losses} | </h4>
-                                <h4>OT: {team.leagueRecord.ot}</h4>
+                                <div tabindex="0" on:keydown={(event) => onKeydown(event.key)}>
+                                    <img class="team-logo" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{team.team.id}.svg" alt="{teamName} Logo">
+                                    <h4>{team.team.name}</h4>
+                                    <h4>Wins: {team.leagueRecord.wins} | </h4>
+                                    <h4>Losses: {team.leagueRecord.losses} | </h4>
+                                    <h4>OT: {team.leagueRecord.ot}</h4>
                                 </div>
                             </Card> 
                         </div>
