@@ -105,11 +105,11 @@ getStats()
     }
 
     function handleClick(name, ranking, pointTally, logoId){
-        modalIsOpen = true
-        teamName = name
-        rank = ranking
-        points = pointTally
-        id = logoId
+           modalIsOpen = true
+           teamName = name
+           rank = ranking
+           points = pointTally
+           id = logoId
     }
 
     function onKeydown(event,name, ranking, pointTally, logoId){
@@ -161,7 +161,12 @@ getStats()
                                 id = team.team.id
                             ))}>
                             <Card>
-                                <div tabindex="0" on:keydown={(event) => onKeydown(event.key)}>
+                                <div tabindex="0" on:keydown={(event) => onKeydown(event.key,
+                                teamName = team.team.name, 
+                                rank = team.leagueRank, 
+                                points = team.points, 
+                                id = team.team.id
+                                )}>
                                     <img class="team-logo" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{team.team.id}.svg" alt="{teamName} Logo">
                                     <h4>{team.team.name}</h4>
                                     <h4>Wins: {team.leagueRecord.wins} | </h4>
