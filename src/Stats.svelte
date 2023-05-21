@@ -104,16 +104,8 @@ getStats()
         modalIsOpen = false
     }
 
-    function handleClick(name, ranking, pointTally, logoId){
-           modalIsOpen = true
-           teamName = name
-           rank = ranking
-           points = pointTally
-           id = logoId
-    }
-
-    function onKeydown(event,name, ranking, pointTally, logoId){
-        if(event === "Enter"){
+    function onEvent(event, name, ranking, pointTally, logoId){
+        if(event === "Enter" || event === "Click"){
             modalIsOpen = true
             teamName = name
             rank = ranking
@@ -147,25 +139,26 @@ getStats()
 {#await statsArray}
     loading
 {:then response}
-
      {#each response.records as division }
         {#key selectedYear}
             <DivisionCard>
                 <h1 class="division-name">Division: {division.division.name}</h1>
                 {#each division.teamRecords as team }
                     {#if !search || team.team.name.toLowerCase().includes(search.toLowerCase())}
-                        <div  class="card-wrapper" on:click={(handleClick(
+                        <div  class="card-wrapper" on:click={(onEvent(
+                                event = "Click",
                                 teamName = team.team.name, 
                                 rank = team.leagueRank, 
                                 points = team.points, 
                                 id = team.team.id
                             ))}>
                             <Card>
-                                <div tabindex="0" on:keydown={(event) => onKeydown(event.key,
-                                teamName = team.team.name, 
-                                rank = team.leagueRank, 
-                                points = team.points, 
-                                id = team.team.id
+                                <div tabindex="0" on:keydown={(event) => onEvent(
+                                    event.key,
+                                    teamName = team.team.name, 
+                                    rank = team.leagueRank, 
+                                    points = team.points, 
+                                    id = team.team.id,
                                 )}>
                                     <img class="team-logo" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{team.team.id}.svg" alt="{teamName} Logo">
                                     <h4>{team.team.name}</h4>
