@@ -125,16 +125,8 @@ getStats()
 
 <svelte:window bind:scrollY={scroll}/>
 <div class="search-box">
-    <label for="Search-Bar">Search</label>
     <input class="search-bar" id="Search-bar" placeholder="Search for team" bind:value={search} type="search" name="search">
 </div>
-
-    <select name="Year Select Dropdown" id="year-select" bind:value={selectedYear} on:change={(event) => fetchData(seasonYear(event.target.value))}>
-        {#each years as year }
-            <option value="{year}">{year}</option>
-        {/each}
-    </select>
-
 
 {#await statsArray}
     loading
@@ -162,9 +154,9 @@ getStats()
                                 )}>
                                     <img class="team-logo" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{team.team.id}.svg" alt="{teamName} Logo">
                                     <h4>{team.team.name}</h4>
-                                    <h4>Wins: {team.leagueRecord.wins} | </h4>
+                                    <!-- <h4>Wins: {team.leagueRecord.wins} | </h4>
                                     <h4>Losses: {team.leagueRecord.losses} | </h4>
-                                    <h4>OT: {team.leagueRecord.ot}</h4>
+                                    <h4>OT: {team.leagueRecord.ot}</h4> -->
                                 </div>
                             </Card> 
                         </div>
