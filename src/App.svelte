@@ -2,6 +2,7 @@
 	import Header from './Header.svelte';
 	import Stats from './Stats.svelte';
 	import Footer from './Footer.svelte';
+	// Background Image
 	const src = "../Grungy03-byGhostlyPixels.png" 
 </script>
 

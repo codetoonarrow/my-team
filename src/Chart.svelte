@@ -1,14 +1,8 @@
 <script>
 export let outcome; 
 
-let visible = true;
-
-$: {
-	
-	console.table(`${outcome}`)
-}
 </script>
-{#if visible}
+
 <div class="chart">
 	<svg  width="600" height="100" role="img">
 		<!-- x axis -->
@@ -25,7 +19,7 @@ $: {
 		<polyline style="stroke: #ef6351; stroke-width: 3" points={outcome}></polyline>
 	</svg>
 </div>
-{/if}
+
 <style>
 	svg {
 		overflow: visible;
