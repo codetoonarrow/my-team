@@ -9,13 +9,13 @@
     export let teamName;
     export let id;
     export let rank;
-    export let points;
+    export let season;
     let gameResults = [];
 
     let wins = getWins();
     let yAxis = 0
-    let selectedYear = 2018
-    let items = [2018, 2019, 2020, 2021]
+    
+    let items = [2022, 2021, 2020, 2019, 2018]
     let datesArray = [0]
 
     async function getWins(combinedSeasonYear = 20212022){
@@ -89,17 +89,14 @@ function handleRender(){
         {#await wins}
             loading...
         {:then}
-            <h2>{selectedYear} Season</h2>
+            <h2>{season} Season</h2>
             <h3>League Rank: {rank}</h3>
-            <h3>Points: {points}</h3>
             <Chart outcome={gameResults} /> 
         {/await}
 
-        <h3>Outcome: {selectedYear}</h3>
-        
         <button on:click={ () => dispatch('close')}>Close</button>  
 
-        <select bind:value={selectedYear} on:change={(event) => getWins(seasonYear(parseInt(event.target.value)))}>
+        <select bind:value={season} on:change={(event) => getWins(seasonYear(parseInt(event.target.value)))}>
             {#each items as item}
                 <option value={item}>{item}</option>
             {/each}

@@ -19,10 +19,11 @@ let id
 let scroll
 let stats = []
 let years = [2018, 2019, 2020, 2021]
-let selectedYear 
+let selectedYear
+let season 
 
 //Call the NHL API and put the response into localstorage as a JSON Object
-async function fetchData(selectedYear = 20152016){
+async function fetchData(selectedYear = 20222023){
     
     console.log('Fetching data... ⏳');
 
@@ -104,13 +105,14 @@ getStats()
         modalIsOpen = false
     }
 
-    function onEvent(event, name, ranking, pointTally, logoId){
+    function onEvent(event, name, ranking, pointTally, logoId, season){
         if(event === "Enter" || event === "Click"){
             modalIsOpen = true
             teamName = name
             rank = ranking
             points = pointTally
             id = logoId
+            season = season
         }
     }
 
@@ -132,7 +134,6 @@ getStats()
     loading
 {:then response}
      {#each response.records as division }
-        {#key selectedYear}
             <DivisionCard>
                 <h1 class="division-name">Division: {division.division.name}</h1>
                 {#each division.teamRecords as team }
@@ -151,6 +152,7 @@ getStats()
                                     rank = team.leagueRank, 
                                     points = team.points, 
                                     id = team.team.id,
+                                    season = division.division.season
                                 )}>
                                     <img class="team-logo" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{team.team.id}.svg" alt="{teamName} Logo">
                                     <h4>{team.team.name}</h4>
@@ -163,7 +165,6 @@ getStats()
                     {/if}
                 {/each}
             </DivisionCard> 
-        {/key}
      {/each}
 {/await}
 
