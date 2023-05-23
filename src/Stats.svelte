@@ -6,7 +6,6 @@ import { get, writable } from 'svelte/store';
 import Card from './Team-Card.svelte';
 import DivisionCard from './DivisionCard.svelte';
 import Modal from './Modal.svelte';
-import Showcase from './Showcase.svelte';
 import { each } from 'svelte/internal';
 
 let modalIsOpen = false
@@ -17,8 +16,6 @@ let points
 let id
 let scroll
 let stats = []
-let years = [2018, 2019, 2020, 2021]
-let selectedYear
 let season 
 
 //Call the NHL API and put the response into localstorage as a JSON Object
@@ -62,36 +59,10 @@ function getStats(){
     })
     return statsArray
 }
+
 const statsArray = JSON.parse(localStorage.getItem('stats'));
 getStats()
 
-    let teamIds = []
-    function getTeamIds(stats){
-        for(let i = 0; i < stats.records.length; i++){
-            for(let j = 0; j < stats.records[i].teamRecords.length; j++){
-                const teamId = stats.records[i].teamRecords[j].team.id;
-            if(!teamIds.includes(teamId)){
-                teamIds.push(teamId);
-            }
-            }
-        }
-        return teamIds
-    }
-
-    async function generateRandomid(){
-        const stats = JSON.parse(localStorage.getItem('stats'));
-        const teamIds = getTeamIds(stats)
-        const randomNumber = Math.floor(Math.random() * teamIds.length);
-        const randomTeamID = teamIds[randomNumber]
-        return randomTeamID
-    }
-
-    let result = writable(null);
-
-        generateRandomid().then((randomTeamId) =>{
-            result.set(randomTeamId) 
-    })
-     
     function closeModal(){
         modalIsOpen = false
     }
@@ -107,13 +78,6 @@ getStats()
         }
     }
 
-    function seasonYear(selectedYear){
-        let seasonYearStart = selectedYear
-        let seasonYearEnd = selectedYear + 1
-        let addSeason = seasonYearStart.toString() + seasonYearEnd.toString()
-        let combinedSeasonYear = Number(addSeason)
-        return combinedSeasonYear
-    }
 </script>   
 
 <svelte:window bind:scrollY={scroll}/>
