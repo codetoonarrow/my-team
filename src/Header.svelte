@@ -2,6 +2,7 @@
     import { fly } from 'svelte/transition';
     import { themeEnabled } from './stores.js';
    
+    // Toggle function for the light and dark mode
     function switchTheme(){
 		if($themeEnabled){
 			$themeEnabled = false

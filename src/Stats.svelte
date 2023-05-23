@@ -8,7 +8,6 @@ import DivisionCard from './DivisionCard.svelte';
 import Modal from './Modal.svelte';
 import Showcase from './Showcase.svelte';
 import { each } from 'svelte/internal';
-import Puck from './Puck.svelte';
 
 let modalIsOpen = false
 let search
@@ -65,14 +64,6 @@ function getStats(){
 }
 const statsArray = JSON.parse(localStorage.getItem('stats'));
 getStats()
-// const statsArray = getStats()
-// localStorage.setItem('stats', JSON.stringify(statsArray))
-// console.log(localStorage)
-//    async function getStats(){
-//         const res = await fetch("https://statsapi.web.nhl.com/api/v1/standings?hydrate=record(overall),division,conference,team(nextSchedule(team),previousSchedule(team))&season=20212022&site=en_nhl")
-//         const stats = await res.json();
-//         return stats;
-//     }
 
     let teamIds = []
     function getTeamIds(stats){
