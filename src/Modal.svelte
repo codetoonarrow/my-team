@@ -1,32 +1,35 @@
 <script>
- 
     import Chart from './Chart.svelte';
-    import { onMount, onDestroy, afterUpdate } from 'svelte';
-    import { writable } from 'svelte/store';
     import { fly, fade } from 'svelte/transition';
+    // For the custom button Event
     import { createEventDispatcher } from 'svelte';
 
     export let teamName;
     export let id;
     export let rank;
     export let season;
-    let gameResults = [];
 
+    // Variables for the Chart
+    let gameResults = [];
     let wins = getWins();
     let yAxis = 0
     
-    let items = [2022, 2021, 2020, 2019, 2018]
-    let datesArray = [0]
+    // Variables for the Dropdown
+    let seasonYears = [2022, 2021, 2020, 2019, 2018]
 
     async function getWins(combinedSeasonYear = 20212022){
         const res = await fetch(`https://statsapi.web.nhl.com/api/v1/schedule?season=${combinedSeasonYear}`)
         const wins = await res.json()
         const results = wins.dates
+
+        // To reset the chart plotted points and reset the yaxis 
         gameResults = []
         yAxis = 0
+
         for (let i = 0; i  < results.length; i++){
             let obj = results[i].games
             for (let j = 0; j < obj.length; j++){
+                // Check when the selected team played at home or away what the result of the game was
                 if (obj[j].teams.home.team.id === id && obj[j].teams.home.score > obj[j].teams.away.score || obj[j].teams.away.team.id === id && obj[j].teams.away.score > obj[j].teams.home.score) {
                     updateOutcome("WIN")
                 }else if (obj[j].teams.home.team.id === id && obj[j].teams.home.score < obj[j].teams.away.score || obj[j].teams.away.team.id === id && obj[j].teams.away.score < obj[j].teams.home.score){
@@ -36,9 +39,12 @@
         }
     }
 
-    // The NHL API requires that if a season is to be returned it needs to be the year and the year following
-    // For example: Season of 2018 would be "20182019"
-    // This function takes a selected year as a string and appends the next year
+
+    /* 
+    The NHL API requires that if a season is to be returned it needs to be the year and the year following
+    For example: Season of 2018 would be "20182019"
+    This function takes a selected year as a string and appends the next year
+    */
     function seasonYear(selectedYear){
         let seasonYearStart = selectedYear
         let seasonYearEnd = selectedYear + 1
@@ -48,7 +54,6 @@
     }
 
     //Plots the results of the wins and losses to  chart
-    // TODO Simplify this function
     function updateOutcome(gameOutcome){
         let movePoint
         let chartCoordinates
@@ -68,16 +73,9 @@
             gameResults.push(chartCoordinates)   
         }
     }
-    
-    async function cleanDateString(str){
-        const result = await str.split("T")[0]
-        datesArray.push(result)
-    }
-function handleRender(){
-    return getWins(20192020)
-}
+
     // Custom event for when the close button is clicked within the Modal
-    const dispatch = createEventDispatcher();
+    const dispatch = createEventDispatcher()
     
 </script>
 
@@ -97,8 +95,8 @@ function handleRender(){
         <button on:click={ () => dispatch('close')}>Close</button>  
 
         <select bind:value={season} on:change={(event) => getWins(seasonYear(parseInt(event.target.value)))}>
-            {#each items as item}
-                <option value={item}>{item}</option>
+            {#each seasonYears as year}
+                <option value={year}>{year}</option>
             {/each}
         </select>   
     </div>
