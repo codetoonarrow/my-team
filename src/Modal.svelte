@@ -1,5 +1,5 @@
 <script>
-    import Chart from './Chart.svelte';
+    import Chart, {downloadSVG} from './Chart.svelte';
     import { fly, fade } from 'svelte/transition';
     // For the custom button Event
     import { createEventDispatcher } from 'svelte';
@@ -77,6 +77,7 @@
     // Custom event for when the close button is clicked within the Modal
     const dispatch = createEventDispatcher()
     
+  
 </script>
 
 <div class="modal-bg" transition:fade>
@@ -88,10 +89,9 @@
             loading...
         {:then}
             <h2>{season} Season</h2>
-            <h3>League Rank: {rank}</h3>
             <Chart outcome={gameResults} /> 
         {/await}
-
+        <button on:click={downloadSVG}>Download</button>
         <button on:click={ () => dispatch('close')}>Close</button>  
 
         <select bind:value={season} on:change={(event) => getWins(seasonYear(parseInt(event.target.value)))}>

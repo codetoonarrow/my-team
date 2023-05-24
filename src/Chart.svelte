@@ -1,5 +1,15 @@
+<script context="module">
+ 
+
+export function downloadSVG(){
+	console.log("hello")
+}
+
+</script>
+
 <script>
-export let outcome; 
+
+export let outcome;
 
 </script>
 
