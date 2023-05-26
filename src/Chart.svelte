@@ -8,7 +8,9 @@ let svgRef;
 
 export function downloadSVG(){
     const svg = svgRef;
+	//Converts the XML into object string that can be manipulated. Here it is converting XML to string representation
     const svgData = new XMLSerializer().serializeToString(svg);
+	//Specifiy the object and our filetype
     const blob = new Blob([svgData], { type: 'image/svg+xml' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
