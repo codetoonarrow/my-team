@@ -3,7 +3,7 @@ export let outcome;
 </script>
 
 <script context="module">
- 
+
 let svgRef;
 
 export function downloadSVG(){
@@ -45,6 +45,10 @@ export function downloadSVG(){
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			}
+			text {
+				font-family: "Gill Sans", sans-serif;
+				font-weight: bold;
 			}
 		</style>
 

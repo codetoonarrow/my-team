@@ -91,7 +91,7 @@
             <h2>{season} Season</h2>
             <Chart outcome={gameResults} /> 
         {/await}
-        <button on:click={downloadSVG}>Download</button>
+
         <button on:click={ () => dispatch('close')}>Close</button>  
 
         <select bind:value={season} on:change={(event) => getWins(seasonYear(parseInt(event.target.value)))}>
@@ -99,6 +99,9 @@
                 <option value={year}>{year}</option>
             {/each}
         </select>   
+
+        <button on:click={downloadSVG}>Download</button>
+        
     </div>
 </div>
 
