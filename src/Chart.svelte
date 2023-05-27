@@ -59,8 +59,8 @@ export function downloadSVG(){
 		<!-- y axis -->
 		<line x1="0" x2="0" y1="0" y2="100"></line>
 		<g class="y" transform="translate(-10,0)">
-			<text y="100">Loss</text>
-			<text y="0">Win</text>
+			<text font-family="Gill Sans, sans-serif" y="100">Loss</text>
+			<text font-family="Gill Sans, sans-serif" y="0">Win</text>
 		</g>
 		<!-- data -->
 		<polyline style="stroke: #ef6351; stroke-width: 3" points={outcome}></polyline>
