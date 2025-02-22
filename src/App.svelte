@@ -10,7 +10,7 @@
 <main>
 	<!-- svelte-ignore a11y-img-redundant-alt -->
 	<div class="container">
-		<img src={src} alt="background image" />
+		<!-- <img src={src} alt="background image" /> -->
 		<Header />
 		<Stats />
 		<Footer />

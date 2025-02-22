@@ -1,6 +1,4 @@
 <script>
-// https://statsapi.web.nhl.com/api/v1/schedule?season=20212022
-// API for past schedule
 import { onMount } from 'svelte';
 import { get, writable } from 'svelte/store';
 import Card from './Team-Card.svelte';
@@ -15,57 +13,26 @@ let rank
 let points
 let id
 let scroll
-let stats = []
-let season 
+let standings = []
 
 //Call the NHL API and put the response into localstorage as a JSON Object
-async function fetchData(selectedYear = 20222023){
+async function fetchData(seasonEndDate = "2024-04-18"){
     
     console.log('Fetching data... ⏳');
 
-    const response = await fetch(`https://statsapi.web.nhl.com/api/v1/standings?hydrate=record(overall),division,conference,team(nextSchedule(team),previousSchedule(team))&season=${selectedYear}`)
+    // const response = await fetch(`https://statsapi.web.nhl.com/api/v1/standings?hydrate=record(overall),division,conference,team(nextSchedule(team),previousSchedule(team))&season=${selectedYear}`)
+    const response = await fetch(`http://localhost:3000/api/nhl/standings/${seasonEndDate}`)
+
     const stats = await response.json()
 
-    console.log('Data received: ✅', stats);
+    console.log('Data received: ✅');
 
-    localStorage.setItem('stats', JSON.stringify(stats))
-    console.log('Stats set:', stats);
+    standings = stats.standings || []
+    console.log(standings)
 }
 
-// When the site loads check to make sure that the localstorage is not stale data or doubling up
-onMount(async () => {
-    const storedData = localStorage.getItem('stats')
-    console.log()
-    if (storedData) {
-        fetchData()
-        stats = JSON.parse(storedData)
-    } else {
-
-        await fetchData()
-    }
-})
-
-function getStats(){
-    let statsArray = []
-    Object.keys(localStorage).forEach(function(key){
-        if(key.startsWith('api_call_')){
-            let apiCall = JSON.parse(localStorage.getItem(key))
-            statsArray.push({
-                endpoint: apiCall.endpoint,
-                timestamp: apiCall.timestamp,
-                responseTime: apiCall.responseTime
-            })
-        }
-    })
-    return statsArray
-}
-
-const statsArray = JSON.parse(localStorage.getItem('stats'));
-getStats()
-
-    function closeModal(){
-        modalIsOpen = false
-    }
+fetchData()
+ 
 
     function onEvent(event, name, ranking, pointTally, logoId, season){
         if(event === "Enter" || event === "Click"){
@@ -85,43 +52,36 @@ getStats()
     <input class="search-bar" id="Search-bar" placeholder="Search for team" bind:value={search} type="search" name="search">
 </div>
 
-{#await statsArray}
-    loading
-{:then response}
-     {#each response.records as division }
-            <DivisionCard>
-                <h1 class="division-name">Division: {division.division.name}</h1>
-                {#each division.teamRecords as team }
-                    {#if !search || team.team.name.toLowerCase().includes(search.toLowerCase())}
-                        <div  class="card-wrapper" on:click={(onEvent(
-                                event = "Click",
-                                teamName = team.team.name, 
-                                rank = team.leagueRank, 
-                                points = team.points, 
-                                id = team.team.id
-                            ))}>
-                            <Card>
-                                <div tabindex="0" on:keydown={(event) => onEvent(
-                                    event.key,
-                                    teamName = team.team.name, 
-                                    rank = team.leagueRank, 
-                                    points = team.points, 
-                                    id = team.team.id,
-                                    season = division.division.season
-                                )}>
-                                    <img class="team-logo" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{team.team.id}.svg" alt="{teamName} Logo">
-                                    <h4>{team.team.name}</h4>
-                                    <!-- <h4>Wins: {team.leagueRecord.wins} | </h4>
-                                    <h4>Losses: {team.leagueRecord.losses} | </h4>
-                                    <h4>OT: {team.leagueRecord.ot}</h4> -->
-                                </div>
-                            </Card> 
+{#each standings as team }
+    <DivisionCard>
+        <h1 class="division-name">Division: {team.divisionName}</h1>
+            {#if !search || team.teamName.default.toLowerCase().includes(search.toLowerCase())}
+                <div  class="card-wrapper" on:click={(onEvent(
+                        event = "Click",
+                        teamName = team.teamName.default, 
+                        // rank = team.leagueRank, 
+                        // points = team.points, 
+                        // id = team.team.id
+                    ))}>
+                    <Card>
+                        <div tabindex="0" on:keydown={(event) => onEvent(
+                            event.key,
+                            teamName = team.teamName.default, 
+                            // rank = team.leagueRank, 
+                            // points = team.points, 
+                            // id = team.team.id,
+                            // season = division.division.season
+                        )}> 
+                            <!-- <img class="team-logo" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{team.team.id}.svg" alt="{teamName} Logo"> -->
+                            <h4>{team.teamName.default} | </h4>
+                            <h4>Wins: {team.wins} | </h4>
+                            <h4>Losses: {team.losses} | </h4>
                         </div>
-                    {/if}
-                {/each}
-            </DivisionCard> 
-     {/each}
-{/await}
+                    </Card> 
+                </div> 
+            {/if}
+    </DivisionCard> 
+{/each}
 
 {#if modalIsOpen}
     <Modal on:close={closeModal} teamName={teamName} rank={rank} points={points} id={id}/>  
