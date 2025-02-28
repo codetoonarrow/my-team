@@ -28,7 +28,7 @@ async function fetchData(seasonEndDate = "2024-04-18"){
     console.log('Data received: ✅');
 
     standings = stats.standings || []
-    console.log(standings)
+    console.log()
 }
 
 fetchData()
@@ -72,7 +72,7 @@ fetchData()
                             // id = team.team.id,
                             // season = division.division.season
                         )}> 
-                            <!-- <img class="team-logo" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{team.team.id}.svg" alt="{teamName} Logo"> -->
+                            <img class="team-logo" src="https://assets.nhle.com/logos/nhl/svg/{team.teamAbbrev.default}_light.svg" alt="{team.teamName.default} Logo">
                             <h4>{team.teamName.default} | </h4>
                             <h4>Wins: {team.wins} | </h4>
                             <h4>Losses: {team.losses} | </h4>
